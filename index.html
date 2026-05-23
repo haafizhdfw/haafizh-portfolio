@@ -162,38 +162,33 @@
     }
 
     .hero-name {
-      font-size: clamp(96px, 14.5vw, 240px);
-      font-weight: 900;
-      letter-spacing: var(--ls-tight);
+      font-size: clamp(120px, 17vw, 290px);
+      font-weight: 500;
+      letter-spacing: -0.07em;
       line-height: 0.88;
       color: var(--black);
       white-space: nowrap;
-      display: flex; align-items: flex-end; gap: 0;
+      display: inline;
     }
 
-    /* The "." replaced by a red circle */
-    .hero-period {
-      display: inline-block;
-      width: 0.12em; height: 0.12em;
-      background: var(--red);
-      border-radius: 50%;
-      margin-left: 0.02em;
-      margin-bottom: 0.08em;
-      flex-shrink: 0;
+    /* "ar" in harris — medium italic */
+    .hero-ar {
+      font-style: italic;
     }
 
-    /* ® badge — floats top-right of the name */
+    /* "." as inline red character, same font as name */
+    .hero-period-text {
+      color: var(--red);
+    }
+
+    /* ® badge — no extra border (® glyph already has a circle) */
     .hero-reg {
       position: absolute;
       top: -0.08em;
       right: -0.14em;
-      font-size: 0.22em; /* relative to .hero-name font-size */
+      font-size: 0.2em;
       font-weight: 400;
       color: var(--black);
-      border: 0.12em solid var(--black);
-      border-radius: 50%;
-      width: 1.1em; height: 1.1em;
-      display: flex; align-items: center; justify-content: center;
       line-height: 1;
       letter-spacing: 0;
     }
@@ -724,11 +719,9 @@
 
     <!-- Big name -->
     <div class="hero-name-block">
-      <div class="hero-name">
-        <div class="hero-name-wrap">
-          haafizh<span class="hero-period"></span>
-          <span class="hero-reg">®</span>
-        </div>
+      <div class="hero-name-wrap">
+        <span class="hero-name">h<span class="hero-ar">ar</span>ris<span class="hero-period-text">.</span></span>
+        <span class="hero-reg">®</span>
       </div>
       <p class="hero-subtitle">Digital Marketing Systems Builder</p>
     </div>
