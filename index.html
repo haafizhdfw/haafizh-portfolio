@@ -266,30 +266,52 @@
     }
 
     /* ─────────────────────────────────────────────
-       STATS BAR  (below hero, on scroll)
+       STATS BAR  — dark marquee strip
     ───────────────────────────────────────────── */
     .stats-bar {
+      background: #222222;
+      overflow: hidden;
+      padding: 22px 0;
+    }
+    .stats-inner {
       display: flex;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      background: var(--bg);
+      align-items: center;
+      gap: 40px;
+      width: max-content;
+      animation: marquee 28s linear infinite;
+    }
+    .stats-inner:hover { animation-play-state: paused; }
+    .stat-bullet {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: #CCFF00;
+      flex-shrink: 0;
     }
     .stat-item {
-      flex: 1;
-      padding: 28px 48px;
-      border-right: 1px solid var(--line);
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 18px;
+      letter-spacing: -0.09em;
+      color: #CCFF00;
+      white-space: nowrap;
     }
-    .stat-item:last-child { border-right: none; }
     .stat-n {
-      font-size: 40px; font-weight: 800;
-      letter-spacing: var(--ls-tight);
-      color: var(--black); line-height: 1;
-      margin-bottom: 4px;
+      font-weight: 300;
+      font-size: 18px;
+      color: #CCFF00;
+    }
+    .stat-slash {
+      color: rgba(204,255,0,0.5);
     }
     .stat-l {
-      font-size: 11px; font-weight: 600;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--lgray);
+      color: rgba(204,255,0,0.75);
+      font-weight: 300;
+      letter-spacing: -0.09em;
+      text-transform: none;
+      font-size: 18px;
     }
 
     /* ─────────────────────────────────────────────
@@ -760,21 +782,20 @@
 
   <!-- ══════════════ STATS BAR ══════════════ -->
   <div class="stats-bar">
-    <div class="stat-item reveal">
-      <div class="stat-n">292K+</div>
-      <div class="stat-l">TikTok Views · NZ Market</div>
-    </div>
-    <div class="stat-item reveal">
-      <div class="stat-n">1,478</div>
-      <div class="stat-l">Leads via Paid Campaigns</div>
-    </div>
-    <div class="stat-item reveal">
-      <div class="stat-n">$3.87</div>
-      <div class="stat-l">Avg. Cost Per Lead</div>
-    </div>
-    <div class="stat-item reveal" style="flex:1.4">
-      <div class="stat-n" style="font-size:18px;line-height:1.4;font-weight:700;letter-spacing:-0.03em;">3 Years · Supersub NZ</div>
-      <div class="stat-l">Digital Marketing Systems Builder</div>
+    <div class="stats-inner">
+      <div class="stat-bullet"></div>
+      <div class="stat-item"><span class="stat-n">292K+</span><span class="stat-slash">/</span><span class="stat-l">TikTok Views</span></div>
+      <div class="stat-bullet"></div>
+      <div class="stat-item"><span class="stat-n">1,778</span><span class="stat-slash">/</span><span class="stat-l">Leads Generated</span></div>
+      <div class="stat-bullet"></div>
+      <div class="stat-item"><span class="stat-n">3+</span><span class="stat-slash">/</span><span class="stat-l">Years of Experience</span></div>
+      <!-- duplicate for seamless loop -->
+      <div class="stat-bullet"></div>
+      <div class="stat-item"><span class="stat-n">292K+</span><span class="stat-slash">/</span><span class="stat-l">TikTok Views</span></div>
+      <div class="stat-bullet"></div>
+      <div class="stat-item"><span class="stat-n">1,778</span><span class="stat-slash">/</span><span class="stat-l">Leads Generated</span></div>
+      <div class="stat-bullet"></div>
+      <div class="stat-item"><span class="stat-n">3+</span><span class="stat-slash">/</span><span class="stat-l">Years of Experience</span></div>
     </div>
   </div>
 
