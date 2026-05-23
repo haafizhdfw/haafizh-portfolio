@@ -181,12 +181,12 @@
       color: var(--red);
     }
 
-    /* ® badge — no extra border (® glyph already has a circle) */
+    /* ® badge — sized in px so it's always visible */
     .hero-reg {
       position: absolute;
-      top: -0.05em;
-      right: -0.38em;
-      font-size: 0.35em;
+      top: 0;
+      right: calc(-1 * clamp(52px, 7vw, 116px) * 1.15);
+      font-size: clamp(52px, 7vw, 116px);
       font-weight: 400;
       color: var(--black);
       line-height: 1;
@@ -195,15 +195,18 @@
 
     .hero-name-wrap {
       position: relative;
-      display: inline-block;
+      display: block;
+      width: fit-content;
     }
 
     /* "Personal Portfolio" below name */
     .hero-subtitle {
-      margin-top: 20px;
-      font-size: 75px;
+      margin-top: 16px;
+      margin-left: 0;
+      padding-left: 0;
+      font-size: 60px;
       font-weight: 400;
-      color: var(--gray);
+      color: var(--black);
       letter-spacing: -0.06em;
     }
 
