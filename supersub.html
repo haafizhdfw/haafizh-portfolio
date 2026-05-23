@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Supersub — Digital Marketing Case Study · Haafizh Daffa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+
+    /* ─────────────────────────────────────────────
+       RESET
+    ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #f3f4f3;
+      --black:    #0d0d0d;
+      --gray:     #6b6b6b;
+      --lgray:    #b8b8b2;
+      --red:      #e63329;
+      --blue:     #2563ff;
+      --white:    #ffffff;
+      --line:     #ddddd5;
+      --navy:     #111827;
+      --navy-mid: #1e2d40;
+
+      --ls-tight:  -0.08em;
+      --ls-normal: -0.03em;
+
+      --nav-h: 72px;
+      --sidebar-w: 240px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--black);
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
+    }
+
+    /* ─────────────────────────────────────────────
+       CUSTOM CURSOR
+    ───────────────────────────────────────────── */
+    .cur-dot {
+      position: fixed; pointer-events: none; z-index: 9999;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--black);
+      transform: translate(-50%, -50%);
+    }
+    .cur-ring {
+      position: fixed; pointer-events: none; z-index: 9998;
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1.5px solid rgba(0,0,0,.25);
+      transform: translate(-50%, -50%);
+      transition: transform .5s ease, width .25s, height .25s;
+    }
+
+    /* ─────────────────────────────────────────────
+       TOP NAV
+    ───────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: var(--nav-h);
+      display: flex; align-items: center;
+      padding: 0 40px;
+      background: var(--bg);
+      box-shadow: 0 1px 0 var(--line), 0 4px 24px rgba(0,0,0,0.06);
+    }
+    .nav-back {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 15px; font-weight: 500;
+      color: var(--gray); text-decoration: none;
+      letter-spacing: var(--ls-normal);
+      transition: color .2s;
+    }
+    .nav-back:hover { color: var(--black); }
+    .nav-back svg { width: 16px; height: 16px; }
+
+    .nav-logo {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center;
+      text-decoration: none;
+    }
+    .nav-logo img { height: 48px; width: auto; display: block; }
+
+    .nav-client {
+      margin-left: auto;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-client-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #22c55e; flex-shrink: 0;
+    }
+    .nav-client-label {
+      font-size: 14px; font-weight: 500;
+      color: var(--gray);
+      letter-spacing: var(--ls-normal);
+    }
+    .nav-client-label strong { color: var(--black); font-weight: 600; }
+
+    /* ─────────────────────────────────────────────
+       LAYOUT — sidebar + content
+    ───────────────────────────────────────────── */
+    .layout {
+      display: flex;
+      padding-top: var(--nav-h);
+      min-height: 100vh;
+    }
+
+    /* ─── SIDEBAR ─── */
+    .sidebar {
+      position: fixed;
+      top: var(--nav-h);
+      left: 0;
+      width: var(--sidebar-w);
+      height: calc(100vh - var(--nav-h));
+      overflow-y: auto;
+      border-right: 1px solid var(--line);
+      padding: 48px 0 48px 0;
+      display: flex; flex-direction: column;
+      background: var(--bg);
+      z-index: 100;
+    }
+    .sidebar-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--lgray);
+      text-transform: uppercase;
+      padding: 0 28px;
+      margin-bottom: 16px;
+    }
+    .sidebar-nav { list-style: none; }
+    .sidebar-nav li { display: block; }
+    .sidebar-nav a {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 28px;
+      font-size: 13px; font-weight: 500;
+      color: var(--gray);
+      text-decoration: none;
+      letter-spacing: var(--ls-normal);
+      border-left: 2px solid transparent;
+      transition: color .2s, border-color .2s, background .2s;
+      line-height: 1.4;
+    }
+    .sidebar-nav a:hover {
+      color: var(--black);
+      background: rgba(0,0,0,.035);
+    }
+    .sidebar-nav a.active {
+      color: var(--black);
+      border-left-color: var(--black);
+      background: rgba(0,0,0,.04);
+      font-weight: 600;
+    }
+    .sidebar-num {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--lgray);
+      margin-top: 1px;
+      flex-shrink: 0;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.04em;
+    }
+    .sidebar-nav a.active .sidebar-num { color: var(--black); }
+
+    .sidebar-divider {
+      height: 1px;
+      background: var(--line);
+      margin: 20px 28px;
+    }
+    .sidebar-meta {
+      padding: 0 28px;
+      margin-top: 8px;
+    }
+    .sidebar-meta p {
+      font-size: 11px;
+      color: var(--lgray);
+      line-height: 1.6;
+      letter-spacing: var(--ls-normal);
+    }
+    .sidebar-meta strong {
+      color: var(--gray);
+      font-weight: 500;
+    }
+
+    /* ─── MAIN CONTENT ─── */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION BASE STYLES
+    ───────────────────────────────────────────── */
+    .chapter {
+      padding: 96px 72px 96px 72px;
+      border-bottom: 1px solid var(--line);
+    }
+    .chapter:last-child { border-bottom: none; }
+
+    .ch-eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 28px;
+    }
+    .ch-num {
+      font-size: 11px; font-weight: 700;
+      color: var(--lgray); letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .ch-tag {
+      font-size: 11px; font-weight: 600;
+      padding: 3px 10px;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      color: var(--gray);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .ch-tag.red { background: var(--red); color: var(--white); border-color: var(--red); }
+    .ch-tag.blue { background: var(--blue); color: var(--white); border-color: var(--blue); }
+    .ch-tag.green { background: #16a34a; color: var(--white); border-color: #16a34a; }
+
+    .ch-title {
+      font-size: clamp(36px, 4.5vw, 64px);
+      font-weight: 900;
+      letter-spacing: var(--ls-tight);
+      line-height: 0.95;
+      color: var(--black);
+      margin-bottom: 24px;
+    }
+    .ch-title em {
+      font-style: normal;
+      color: var(--red);
+    }
+
+    .ch-lead {
+      font-size: clamp(16px, 1.5vw, 20px);
+      font-weight: 400;
+      color: var(--gray);
+      line-height: 1.65;
+      letter-spacing: var(--ls-normal);
+      max-width: 640px;
+      margin-bottom: 56px;
+    }
+    .ch-lead strong {
+      color: var(--black);
+      font-weight: 600;
+    }
+
+    /* ─────────────────────────────────────────────
+       STAT GRIDS
+    ───────────────────────────────────────────── */
+    .stat-grid {
+      display: grid;
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 56px;
+    }
+    .stat-grid-2 { grid-template-columns: 1fr 1fr; }
+    .stat-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .stat-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+    .stat-cell {
+      background: var(--white);
+      padding: 32px 28px;
+    }
+    .stat-cell.dark {
+      background: var(--navy);
+      color: var(--white);
+    }
+    .stat-label {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--lgray);
+      margin-bottom: 10px;
+    }
+    .stat-cell.dark .stat-label { color: rgba(255,255,255,.45); }
+    .stat-value {
+      font-size: clamp(28px, 3.5vw, 48px);
+      font-weight: 900;
+      letter-spacing: var(--ls-tight);
+      color: var(--black);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-cell.dark .stat-value { color: var(--white); }
+    .stat-value .stat-red { color: var(--red); }
+    .stat-value .stat-blue { color: #60a5fa; }
+    .stat-note {
+      font-size: 12px;
+      color: var(--lgray);
+      font-weight: 400;
+      letter-spacing: var(--ls-normal);
+    }
+    .stat-cell.dark .stat-note { color: rgba(255,255,255,.35); }
+
+    /* ─────────────────────────────────────────────
+       CONTENT BLOCKS
+    ───────────────────────────────────────────── */
+    .content-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 56px;
+    }
+    .content-cols.thirds {
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 32px;
+    }
+
+    .block-title {
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .block-title::before {
+      content: '';
+      display: block; width: 20px; height: 2px;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+
+    .block-body {
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 1.7;
+      letter-spacing: var(--ls-normal);
+    }
+    .block-body strong { color: var(--black); font-weight: 600; }
+    .block-body em { font-style: italic; color: var(--gray); }
+
+    /* ─────────────────────────────────────────────
+       CHANNEL CARDS
+    ───────────────────────────────────────────── */
+    .channel-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 56px;
+    }
+    .channel-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px 28px 24px;
+      transition: box-shadow .2s;
+    }
+    .channel-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.06); }
+
+    .channel-top {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px;
+    }
+    .channel-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .channel-name {
+      font-size: 16px; font-weight: 700;
+      letter-spacing: var(--ls-normal);
+      color: var(--black);
+    }
+    .channel-sub {
+      font-size: 12px; color: var(--lgray);
+      font-weight: 400;
+    }
+
+    .channel-metrics {
+      display: flex; flex-wrap: wrap; gap: 16px;
+    }
+    .ch-metric {
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .ch-metric-val {
+      font-size: 22px; font-weight: 800;
+      letter-spacing: -0.05em;
+      color: var(--black);
+    }
+    .ch-metric-lbl {
+      font-size: 11px; color: var(--lgray);
+      font-weight: 500; letter-spacing: 0.03em;
+    }
+
+    .channel-highlight {
+      margin-top: 18px;
+      padding: 12px 16px;
+      background: var(--bg);
+      border-radius: 10px;
+      font-size: 12px;
+      color: var(--gray);
+      line-height: 1.5;
+      letter-spacing: var(--ls-normal);
+    }
+    .channel-highlight strong { color: var(--black); }
+
+    /* ─────────────────────────────────────────────
+       INSIGHT CALLOUT
+    ───────────────────────────────────────────── */
+    .insight {
+      border-left: 3px solid var(--red);
+      padding: 20px 24px;
+      background: rgba(230,51,41,.04);
+      border-radius: 0 12px 12px 0;
+      margin-bottom: 40px;
+    }
+    .insight-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 8px;
+    }
+    .insight-text {
+      font-size: 15px;
+      color: var(--black);
+      font-weight: 500;
+      line-height: 1.6;
+      letter-spacing: var(--ls-normal);
+    }
+
+    .insight.blue-accent {
+      border-left-color: var(--blue);
+      background: rgba(37,99,255,.04);
+    }
+    .insight.blue-accent .insight-label { color: var(--blue); }
+
+    /* ─────────────────────────────────────────────
+       CAMPAIGN TABLE
+    ───────────────────────────────────────────── */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 40px;
+      font-size: 13px;
+    }
+    .data-table th {
+      text-align: left;
+      padding: 10px 16px;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--lgray);
+      border-bottom: 1px solid var(--line);
+    }
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--black);
+      font-weight: 400;
+      letter-spacing: var(--ls-normal);
+      line-height: 1.4;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: rgba(0,0,0,.018); }
+    .data-table .td-lead {
+      font-weight: 700;
+      color: var(--black);
+    }
+    .data-table .td-badge {
+      display: inline-flex; align-items: center;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 11px; font-weight: 600;
+    }
+    .badge-green { background: #dcfce7; color: #15803d; }
+    .badge-yellow { background: #fef9c3; color: #a16207; }
+    .badge-gray { background: #f3f4f6; color: #6b7280; }
+
+    /* ─────────────────────────────────────────────
+       SEO BAR CHART
+    ───────────────────────────────────────────── */
+    .seo-bars { margin-bottom: 48px; }
+    .seo-bar-row {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 14px;
+    }
+    .seo-bar-label {
+      font-size: 12px; font-weight: 500;
+      color: var(--black);
+      min-width: 220px;
+      white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
+      letter-spacing: var(--ls-normal);
+    }
+    .seo-bar-track {
+      flex: 1;
+      height: 8px;
+      background: var(--line);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .seo-bar-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: var(--black);
+      transition: width 1s ease;
+    }
+    .seo-bar-fill.blue { background: var(--blue); }
+    .seo-bar-fill.red { background: var(--red); }
+    .seo-bar-val {
+      font-size: 12px; font-weight: 700;
+      color: var(--black);
+      min-width: 56px;
+      text-align: right;
+      letter-spacing: -0.03em;
+    }
+
+    /* ─────────────────────────────────────────────
+       DASHBOARD SHOWCASE
+    ───────────────────────────────────────────── */
+    .dash-showcase {
+      background: var(--navy);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    .dash-header {
+      padding: 24px 32px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .dash-header-title {
+      font-size: 16px; font-weight: 700;
+      color: var(--white);
+      letter-spacing: var(--ls-normal);
+    }
+    .dash-header-sub {
+      font-size: 12px; color: rgba(255,255,255,.4);
+      margin-top: 2px;
+      letter-spacing: var(--ls-normal);
+    }
+    .dash-tag {
+      font-size: 11px; font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 100px;
+      background: rgba(34,197,94,.15);
+      color: #4ade80;
+      letter-spacing: 0.04em;
+    }
+    .dash-body { padding: 32px; }
+
+    .dash-kpi-row {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 16px; margin-bottom: 28px;
+    }
+    .dash-kpi {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px;
+      padding: 20px 20px 16px;
+    }
+    .dash-kpi-label {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,.35);
+      margin-bottom: 8px;
+    }
+    .dash-kpi-value {
+      font-size: 28px; font-weight: 900;
+      color: var(--white);
+      letter-spacing: var(--ls-tight);
+      line-height: 1;
+    }
+    .dash-kpi-value.accent { color: #60a5fa; }
+    .dash-kpi-note {
+      font-size: 11px; color: rgba(255,255,255,.3);
+      margin-top: 4px;
+      letter-spacing: var(--ls-normal);
+    }
+
+    .dash-funnel {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .funnel-row {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .funnel-label {
+      font-size: 12px; font-weight: 500;
+      color: rgba(255,255,255,.5);
+      min-width: 100px;
+    }
+    .funnel-bar-track {
+      flex: 1; height: 28px;
+      border-radius: 6px;
+      background: rgba(255,255,255,.06);
+      overflow: hidden;
+    }
+    .funnel-bar-fill {
+      height: 100%;
+      border-radius: 6px;
+      display: flex; align-items: center; padding-left: 12px;
+      font-size: 12px; font-weight: 700;
+      color: var(--white);
+    }
+    .funnel-num {
+      font-size: 12px; font-weight: 700;
+      color: rgba(255,255,255,.6);
+      min-width: 48px; text-align: right;
+    }
+
+    /* ─────────────────────────────────────────────
+       FEATURE LIST
+    ───────────────────────────────────────────── */
+    .feature-list {
+      display: flex; flex-direction: column; gap: 12px;
+      margin-bottom: 40px;
+    }
+    .feature-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 16px 20px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      transition: box-shadow .2s;
+    }
+    .feature-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,.05); }
+    .feature-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .feature-text { }
+    .feature-name {
+      font-size: 14px; font-weight: 700;
+      color: var(--black);
+      margin-bottom: 3px;
+      letter-spacing: var(--ls-normal);
+    }
+    .feature-desc {
+      font-size: 13px; color: var(--gray);
+      line-height: 1.5;
+      letter-spacing: var(--ls-normal);
+    }
+
+    /* ─────────────────────────────────────────────
+       TIMELINE / PROCESS
+    ───────────────────────────────────────────── */
+    .timeline { margin-bottom: 48px; }
+    .tl-item {
+      display: flex; gap: 24px;
+      padding-bottom: 32px;
+      position: relative;
+    }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: 15px; top: 32px;
+      width: 1px;
+      bottom: 0;
+      background: var(--line);
+    }
+    .tl-item:last-child::before { display: none; }
+    .tl-dot {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--black);
+      color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 800;
+      flex-shrink: 0;
+      position: relative; z-index: 1;
+    }
+    .tl-dot.red { background: var(--red); }
+    .tl-dot.blue { background: var(--blue); }
+    .tl-content { padding-top: 4px; }
+    .tl-title {
+      font-size: 15px; font-weight: 700;
+      color: var(--black); margin-bottom: 6px;
+      letter-spacing: var(--ls-normal);
+    }
+    .tl-body {
+      font-size: 13px; color: var(--gray);
+      line-height: 1.6; letter-spacing: var(--ls-normal);
+    }
+    .tl-body strong { color: var(--black); }
+
+    /* ─────────────────────────────────────────────
+       IMPACT SUMMARY
+    ───────────────────────────────────────────── */
+    .impact-hero {
+      background: var(--navy);
+      border-radius: 24px;
+      padding: 56px;
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .impact-hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(37,99,255,.3), transparent 70%);
+      pointer-events: none;
+    }
+    .impact-title {
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: var(--ls-tight);
+      line-height: 1.05;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .impact-title span { color: #60a5fa; }
+    .impact-body {
+      font-size: 16px; color: rgba(255,255,255,.65);
+      line-height: 1.7; max-width: 600px;
+      letter-spacing: var(--ls-normal);
+      position: relative;
+    }
+    .impact-body strong { color: rgba(255,255,255,.9); }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .pillar-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px 24px;
+    }
+    .pillar-icon { font-size: 28px; margin-bottom: 14px; }
+    .pillar-name {
+      font-size: 15px; font-weight: 800;
+      color: var(--black);
+      letter-spacing: var(--ls-normal);
+      margin-bottom: 8px;
+    }
+    .pillar-desc {
+      font-size: 13px; color: var(--gray);
+      line-height: 1.55; letter-spacing: var(--ls-normal);
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION: OVERVIEW HERO
+    ───────────────────────────────────────────── */
+    #overview {
+      background: var(--navy);
+      padding: 0;
+      border-bottom: none;
+      min-height: 500px;
+      position: relative;
+      overflow: hidden;
+    }
+    .overview-inner {
+      padding: 80px 72px 80px;
+      position: relative; z-index: 2;
+    }
+    #overview::before {
+      content: '';
+      position: absolute;
+      bottom: -120px; right: -80px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(37,99,255,.2), transparent 70%);
+      pointer-events: none;
+    }
+    .overview-eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 32px;
+    }
+    .overview-pill {
+      padding: 5px 14px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 100px;
+      font-size: 12px; font-weight: 600;
+      color: rgba(255,255,255,.7);
+      letter-spacing: 0.04em;
+    }
+    .overview-year {
+      font-size: 12px; font-weight: 500;
+      color: rgba(255,255,255,.4);
+      letter-spacing: 0.04em;
+    }
+    .overview-title {
+      font-size: clamp(40px, 5.5vw, 80px);
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: var(--ls-tight);
+      line-height: 0.95;
+      margin-bottom: 28px;
+    }
+    .overview-title .red { color: var(--red); }
+    .overview-subtitle {
+      font-size: clamp(16px, 1.6vw, 20px);
+      font-weight: 400;
+      color: rgba(255,255,255,.55);
+      line-height: 1.65;
+      max-width: 600px;
+      letter-spacing: var(--ls-normal);
+      margin-bottom: 56px;
+    }
+    .overview-subtitle strong { color: rgba(255,255,255,.85); font-weight: 600; }
+    .overview-tags {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .overview-tag {
+      padding: 6px 16px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 100px;
+      font-size: 13px; font-weight: 500;
+      color: rgba(255,255,255,.65);
+      letter-spacing: var(--ls-normal);
+    }
+    .overview-stats-bar {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid rgba(255,255,255,.08);
+      margin-top: 56px;
+    }
+    .ov-stat {
+      padding: 32px 28px;
+      border-right: 1px solid rgba(255,255,255,.08);
+    }
+    .ov-stat:last-child { border-right: none; }
+    .ov-stat-val {
+      font-size: clamp(28px, 3vw, 42px);
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: var(--ls-tight);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .ov-stat-val .accent { color: #60a5fa; }
+    .ov-stat-val .red { color: var(--red); }
+    .ov-stat-lbl {
+      font-size: 11px; font-weight: 500;
+      color: rgba(255,255,255,.4);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─────────────────────────────────────────────
+       SCROLL REVEAL
+    ───────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─────────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────────── */
+    @media (max-width: 1100px) {
+      :root { --sidebar-w: 200px; }
+      .chapter { padding: 72px 48px; }
+      .stat-grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .dash-kpi-row { grid-template-columns: repeat(2, 1fr); }
+      .pillars-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 800px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .chapter { padding: 56px 28px; }
+      .content-cols { grid-template-columns: 1fr; }
+      .content-cols.thirds { grid-template-columns: 1fr; }
+      .channel-grid { grid-template-columns: 1fr; }
+      .stat-grid-3 { grid-template-columns: 1fr; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .overview-stats-bar { grid-template-columns: repeat(2, 1fr); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- CUSTOM CURSOR -->
+  <div class="cur-dot" id="curDot"></div>
+  <div class="cur-ring" id="curRing"></div>
+
+  <!-- TOP NAV -->
+  <nav>
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 12L6 8l4-4"/>
+      </svg>
+      Back
+    </a>
+    <a href="index.html" class="nav-logo">
+      <img src="logo-portfolio.svg" alt="rr." onerror="this.style.display='none'" />
+    </a>
+    <div class="nav-client">
+      <span class="nav-client-dot"></span>
+      <span class="nav-client-label"><strong>Supersub</strong> · Case Study</span>
+    </div>
+  </nav>
+
+  <!-- LAYOUT -->
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-label">Chapters</div>
+      <ul class="sidebar-nav" id="sidebarNav">
+        <li><a href="#overview" class="active">
+          <span class="sidebar-num">01</span>Overview
+        </a></li>
+        <li><a href="#strategy">
+          <span class="sidebar-num">02</span>Strategy
+        </a></li>
+        <li><a href="#social">
+          <span class="sidebar-num">03</span>Social Media
+        </a></li>
+        <li><a href="#paid">
+          <span class="sidebar-num">04</span>Paid Campaigns
+        </a></li>
+        <li><a href="#seo">
+          <span class="sidebar-num">05</span>SEO &amp; Landing
+        </a></li>
+        <li><a href="#dashboards">
+          <span class="sidebar-num">06</span>CRM &amp; Dashboards
+        </a></li>
+        <li><a href="#impact">
+          <span class="sidebar-num">07</span>Impact Summary
+        </a></li>
+      </ul>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-meta">
+        <p><strong>Client</strong><br>Supersub NZ<br>Construction · Cambridge NZ</p>
+        <br>
+        <p><strong>Engagement</strong><br>~3 Years · Ongoing</p>
+        <br>
+        <p><strong>Role</strong><br>Full-Stack Digital Marketer + Systems Builder</p>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+      <!-- ══════════════════════════════════════
+           01 — OVERVIEW
+      ══════════════════════════════════════ -->
+      <section id="overview" class="chapter">
+        <div class="overview-inner">
+          <div class="overview-eyebrow">
+            <span class="overview-pill">Case Study</span>
+            <span class="overview-year">2023 – Present</span>
+          </div>
+          <h1 class="overview-title">
+            Supersub<span class="red">.</span><br>
+            From Campaigns<br>to Complete System.
+          </h1>
+          <p class="overview-subtitle">
+            Most brands hire a social media manager. A paid ads specialist. An SEO consultant. A developer.
+            <strong>Supersub gets all four — plus the infrastructure that connects them.</strong>
+          </p>
+          <div class="overview-tags">
+            <span class="overview-tag">Social Media Management</span>
+            <span class="overview-tag">Facebook &amp; Google Ads</span>
+            <span class="overview-tag">SEO &amp; Content</span>
+            <span class="overview-tag">Custom CRM</span>
+            <span class="overview-tag">Content Dashboard</span>
+            <span class="overview-tag">AI Automation (n8n)</span>
+            <span class="overview-tag">Landing Page Optimization</span>
+          </div>
+          <div class="overview-stats-bar">
+            <div class="ov-stat">
+              <div class="ov-stat-val">292<span style="font-size:.6em;opacity:.5">K</span></div>
+              <div class="ov-stat-lbl">TikTok Views</div>
+            </div>
+            <div class="ov-stat">
+              <div class="ov-stat-val">1,478</div>
+              <div class="ov-stat-lbl">Leads via Paid Ads</div>
+            </div>
+            <div class="ov-stat">
+              <div class="ov-stat-val red">$3.87</div>
+              <div class="ov-stat-lbl">Avg. CPL (NZD)</div>
+            </div>
+            <div class="ov-stat">
+              <div class="ov-stat-val accent">~3 yrs</div>
+              <div class="ov-stat-lbl">Ongoing Engagement</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           02 — STRATEGY
+      ══════════════════════════════════════ -->
+      <section id="strategy" class="chapter reveal">
+        <div class="ch-eyebrow">
+          <span class="ch-num">02</span>
+          <span class="ch-tag">Strategy</span>
+        </div>
+        <h2 class="ch-title">Not views.<br><em>The right views.</em></h2>
+        <p class="ch-lead">
+          The goal was never to go viral. It was to build a content system where every post, every ad, and every landing page serves a specific role in the funnel — and the data tells us exactly which role is working.
+        </p>
+
+        <div class="insight">
+          <div class="insight-label">The Philosophy</div>
+          <div class="insight-text">
+            "1 million views from the wrong audience gives you 10 buyers. 10,000 views from the right people gives you 50. We optimize for the second scenario — every time."
+          </div>
+        </div>
+
+        <div class="content-cols">
+          <div>
+            <div class="block-title">The Problem</div>
+            <p class="block-body">
+              Supersub operates in <strong>construction</strong> — a high-consideration, high-ticket space ($7,900–$8,940 NZD per unit). Typical content plays don't work here. You can't entertain your way to a sale. Buyers need to trust the product, understand the specs, and believe the company delivers.
+              <br><br>
+              Traditional content agencies treat every brand the same. Supersub needed a system built around <strong>how construction buyers actually make decisions.</strong>
+            </p>
+          </div>
+          <div>
+            <div class="block-title">The Framework</div>
+            <p class="block-body">
+              Every piece of content is mapped to one of <strong>5 content pillars</strong> before production begins: Educate (25%), Problem (15%), Solution (25%), Trust (20%), Convert (15%). The question before every script: <em>"What is the purpose of this post?"</em>
+              <br><br>
+              This applies across all channels — TikTok, Instagram, Facebook, YouTube, LinkedIn — and is documented inside the custom Content Dashboard for the whole team to reference.
+            </p>
+          </div>
+        </div>
+
+        <div class="block-title" style="margin-bottom:20px;">Content Architecture for Supersub</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot red">1</div>
+            <div class="tl-content">
+              <div class="tl-title">Define the content universe</div>
+              <div class="tl-body">Mapped out 12 content categories, 5 pillars, and 120+ topic ideas for each product line (Snaplock Wall, SIP Panel). Documented in the Content Dashboard — not in someone's head.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot blue">2</div>
+            <div class="tl-content">
+              <div class="tl-title">Produce to purpose</div>
+              <div class="tl-body">Every carousel, reel, and short-form video is scripted with a clear pillar objective. Carousels handle education and trust. Reels drive reach. Ads drive intent.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot">3</div>
+            <div class="tl-content">
+              <div class="tl-title">Measure and iterate</div>
+              <div class="tl-body">TikTok search traffic %, Facebook CPL, GSC click growth, GA4 generate_lead events — all tracked. Poor-performing angles are cut. Strong ones are scaled.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot">4</div>
+            <div class="tl-content">
+              <div class="tl-title">Build infrastructure to sustain it</div>
+              <div class="tl-body">Two custom dashboards, a CRM replacing HubSpot, and n8n automation — built so the system can scale without proportionally scaling headcount.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="insight blue-accent">
+          <div class="insight-label">Key Differentiator</div>
+          <div class="insight-text">
+            This is not a freelancer managing posts. It's an end-to-end growth system — from content strategy to lead capture to quote delivery — designed, built, and operated by one person.
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           03 — SOCIAL MEDIA
+      ══════════════════════════════════════ -->
+      <section id="social" class="chapter reveal">
+        <div class="ch-eyebrow">
+          <span class="ch-num">03</span>
+          <span class="ch-tag blue">Social Media</span>
+        </div>
+        <h2 class="ch-title">5 channels.<br><em>One system.</em></h2>
+        <p class="ch-lead">
+          Managing TikTok, Instagram, Facebook, YouTube, and LinkedIn simultaneously — not as isolated channels, but as coordinated parts of the same content machine.
+        </p>
+
+        <div class="channel-grid">
+
+          <!-- TIKTOK -->
+          <div class="channel-card">
+            <div class="channel-top">
+              <div class="channel-icon" style="background:#f0f0f0;">🎵</div>
+              <div>
+                <div class="channel-name">TikTok</div>
+                <div class="channel-sub">@supersub_nz · Primary Growth Channel</div>
+              </div>
+            </div>
+            <div class="channel-metrics">
+              <div class="ch-metric">
+                <div class="ch-metric-val">292K</div>
+                <div class="ch-metric-lbl">Total Views</div>
+              </div>
+              <div class="ch-metric">
+                <div class="ch-metric-val">28.6%</div>
+                <div class="ch-metric-lbl">From Search</div>
+              </div>
+              <div class="ch-metric">
+                <div class="ch-metric-val">34K</div>
+                <div class="ch-metric-lbl">Best Video</div>
+              </div>
+              <div class="ch-metric">
+                <div class="ch-metric-val">8+</div>
+                <div class="ch-metric-lbl">Videos &gt;10K</div>
+              </div>
+            </div>
+            <div class="channel-highlight">
+              <strong>28.6% search traffic</strong> — industry typical is under 10%. Viewers actively searching for the product, not passively scrolling. Best video: 34,000 views, 1K likes, 72 comments.
+            </div>
+          </div>
+
+          <!-- INSTAGRAM -->
+          <div class="channel-card">
+            <div class="channel-top">
+              <div class="channel-icon" style="background:#fce7f3;">📸</div>
+              <div>
+                <div class="channel-name">Instagram</div>
+                <div class="channel-sub">@supersub.nz · Brand &amp; Trust Channel</div>
+              </div>
+            </div>
+            <div class="channel-metrics">
+              <div class="ch-metric">
+                <div class="ch-metric-val">97</div>
+                <div class="ch-metric-lbl">Posts</div>
+              </div>
+              <div class="ch-metric">
+                <div class="ch-metric-val">26</div>
+                <div class="ch-metric-lbl">Reels</div>
+              </div>
+              <div class="ch-metric">
+                <div class="ch-metric-val">11</div>
+                <div class="ch-metric-lbl">Carousels</div>
+              </div>
+              <div class="ch-metric">
+                <div class="ch-metric-val">8,694</div>
+                <div class="ch-metric-lbl">90-Day Reach</div>
+              </div>
+            </div>
+            <div class="channel-highlight">
+              Carousel content (up to 7 slides) delivers product education and brand trust. Reels drive new reach. 90-day reach: <strong>8,694 accounts</strong>, including non-followers.
+            </div>
+          </div>
+
+          <!-- FACEBOOK -->
+          <div class="channel-card">
+            <div class="channel-top">
+              <div class="channel-icon" style="background:#eff6ff;">👥</div>
+              <div>
+                <div class="channel-name">Facebook</div>
+                <div class="channel-sub">Supersub NZ · Lead Nurture Channel</div>
+              </div>
+            </div>
+            <div class="channel-metrics">
+              <div class="ch-metric">
+                <div class="ch-metric-val">63</div>
+                <div class="ch-metric-lbl">Posts</div>
+              </div>
+              <div class="ch-metric">
+                <div class="ch-metric-val">26</div>
+                <div class="ch-metric-lbl">Reels</div>
+              </div>
+              <div class="ch-metric">
+                <div class="ch-metric-val">11,027</div>
+                <div class="ch-metric-lbl">90-Day Reach</div>
+              </div>
+            </div>
+            <div class="channel-highlight">
+              Highest organic reach across Meta platforms at <strong>11,027 accounts</strong> (90 days). Serves double duty: organic content + paid ad audience retargeting from campaign traffic.
+            </div>
+          </div>
+
+          <!-- YOUTUBE -->
+          <div class="channel-card">
+            <div class="channel-top">
+              <div class="channel-icon" style="background:#fee2e2;">▶️</div>
+              <div>
+                <div class="channel-name">YouTube</div>
+                <div class="channel-sub">Supersub NZ · SEO &amp; Long-Form</div>
+              </div>
+            </div>
+            <div class="channel-metrics">
+              <div class="ch-metric">
+                <div class="ch-metric-val">56</div>
+                <div class="ch-metric-lbl">Shorts</div>
+              </div>
+              <div class="ch-metric">
+                <div class="ch-metric-val">8</div>
+                <div class="ch-metric-lbl">Long-Form</div>
+              </div>
+              <div class="ch-metric">
+                <div class="ch-metric-val">2K</div>
+                <div class="ch-metric-lbl">Best Short</div>
+              </div>
+            </div>
+            <div class="channel-highlight">
+              Shorts repurposed from TikTok content for cross-platform reach. Long-form videos support SEO strategy — embedded in landing pages and articles as supporting content and trust signals.
+            </div>
+          </div>
+
+        </div>
+
+        <div class="insight">
+          <div class="insight-label">Cross-Channel Architecture</div>
+          <div class="insight-text">
+            TikTok drives discovery and search. Instagram builds brand credibility. Facebook retargets warm audiences and supports ad campaigns. YouTube strengthens SEO and on-site trust. LinkedIn reaches commercial buyers and trade professionals. Each channel has a defined job — and they feed each other.
+          </div>
+        </div>
+
+        <!-- Content Volume -->
+        <div class="block-title" style="margin-bottom:20px;">Content Production (Approximate)</div>
+        <div class="stat-grid stat-grid-4 reveal">
+          <div class="stat-cell">
+            <div class="stat-label">Carousels Built</div>
+            <div class="stat-value">10+</div>
+            <div class="stat-note">60+ total slides, with captions</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-label">Reels Published</div>
+            <div class="stat-value">50+</div>
+            <div class="stat-note">Across TikTok, IG, FB, YouTube</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-label">Content Categories</div>
+            <div class="stat-value">12</div>
+            <div class="stat-note">Snaplock Wall framework</div>
+          </div>
+          <div class="stat-cell dark">
+            <div class="stat-label">Content Pillars</div>
+            <div class="stat-value"><span class="stat-blue">5</span></div>
+            <div class="stat-note">120+ mapped topic ideas</div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════
+           04 — PAID CAMPAIGNS
+      ══════════════════════════════════════ -->
+      <section id="paid" class="chapter reveal">
+        <div class="ch-eyebrow">
+          <span class="ch-num">04</span>
+          <span class="ch-tag red">Paid Campaigns</span>
+        </div>
+        <h2 class="ch-title"><em>$3.87</em> per lead.<br>Industry pays $50–$200+.</h2>
+        <p class="ch-lead">
+          Facebook Ads for a high-ticket B2B construction product — a segment where most advertisers struggle to break even. <strong>1,478 leads captured at an average CPL that benchmarks in the top tier of B2B lead generation globally.</strong>
+        </p>
+
+        <div class="stat-grid stat-grid-4 reveal">
+          <div class="stat-cell dark">
+            <div class="stat-label">Total Leads</div>
+            <div class="stat-value"><span class="stat-blue">1,478</span></div>
+            <div class="stat-note">All paid channels combined</div>
+          </div>
+          <div class="stat-cell dark">
+            <div class="stat-label">Avg. CPL</div>
+            <div class="stat-value">$3.87</div>
+            <div class="stat-note">NZD · All campaigns</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-label">Best Campaign CPL</div>
+            <div class="stat-value" style="color:var(--red)">$3.66</div>
+            <div class="stat-note">Portable Bathroom — 3M active</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-label">Product Price</div>
+            <div class="stat-value">$7.9K+</div>
+            <div class="stat-note">NZD · per unit</div>
+          </div>
+        </div>
+
+        <div class="insight">
+          <div class="insight-label">Why This Number Matters</div>
+          <div class="insight-text">
+            Industry benchmark for B2B construction leads: <strong>$50–$200+ per lead</strong>. At $3.87 average CPL for a $7,900–$8,940 NZD product, the cost-to-revenue ratio puts Supersub in an exceptionally efficient position. For every dollar spent, the potential return is measurably outsized.
+          </div>
+        </div>
+
+        <div class="block-title" style="margin-bottom:20px;">Campaign Breakdown</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Campaign</th>
+              <th>Status</th>
+              <th>Leads</th>
+              <th>CPL (NZD)</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-lead">Leads – Portable Bathroom</td>
+              <td><span class="td-badge badge-green">Active · 3M</span></td>
+              <td>1,352</td>
+              <td><strong>$3.66</strong></td>
+              <td>Primary campaign, JPEG still images</td>
+            </tr>
+            <tr>
+              <td class="td-lead">Leads – Portable Bathroom (Alt)</td>
+              <td><span class="td-badge badge-yellow">Paused</span></td>
+              <td>46</td>
+              <td>$3.99</td>
+              <td>Testimonial creative variant</td>
+            </tr>
+            <tr>
+              <td class="td-lead">Leads – Portable Bathroom (Test)</td>
+              <td><span class="td-badge badge-gray">Testing</span></td>
+              <td>80</td>
+              <td>$4.36</td>
+              <td>New creative angle in testing</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="content-cols reveal">
+          <div>
+            <div class="block-title">Creative Approach</div>
+            <p class="block-body">
+              High-performing ads used <strong>clean JPEG product photography</strong> — no motion, no heavy editing. The product speaks for itself. The creative job was to stop the scroll and get the right person to raise their hand.
+              <br><br>
+              Testimonial variants and lifestyle angles were tested. Product-direct remained the strongest performer across all testing rounds.
+            </p>
+          </div>
+          <div>
+            <div class="block-title">Targeting &amp; Audience</div>
+            <p class="block-body">
+              Targeting built around <strong>construction decision-makers</strong>: business owners, property developers, commercial builders in New Zealand. Interest and behavior layering refined over multiple campaign iterations.
+              <br><br>
+              Warm retargeting audiences built from website traffic and video viewers — fed by the organic social and SEO channels running in parallel.
+            </p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════
+           05 — SEO & LANDING PAGES
+      ══════════════════════════════════════ -->
+      <section id="seo" class="chapter reveal">
+        <div class="ch-eyebrow">
+          <span class="ch-num">05</span>
+          <span class="ch-tag green">SEO &amp; Landing Pages</span>
+        </div>
+        <h2 class="ch-title">Articles closing in<br><em>on homepage traffic.</em></h2>
+        <p class="ch-lead">
+          In 3 months, an article written for the Supersub blog reached click volumes approaching the homepage — without any paid promotion. This is what intent-based content looks like when the keyword strategy is right.
+        </p>
+
+        <div class="stat-grid stat-grid-4 reveal">
+          <div class="stat-cell">
+            <div class="stat-label">Homepage Clicks (6M)</div>
+            <div class="stat-value">1,019</div>
+            <div class="stat-note">18,200 impressions</div>
+          </div>
+          <div class="stat-cell dark">
+            <div class="stat-label">Avg. Position (Homepage)</div>
+            <div class="stat-value"><span class="stat-blue">15.19</span></div>
+            <div class="stat-note">Was 37.23 six months prior</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-label">Article 1 Clicks (3M)</div>
+            <div class="stat-value">92</div>
+            <div class="stat-note">6,693 impressions</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-label">Snaplock Wall Growth</div>
+            <div class="stat-value" style="color:var(--red)">33×</div>
+            <div class="stat-note">2 → 67 clicks in 6 months</div>
+          </div>
+        </div>
+
+        <div class="block-title" style="margin-bottom:20px;">Top Pages — Click Performance (Last 6 Months)</div>
+        <div class="seo-bars">
+          <div class="seo-bar-row">
+            <div class="seo-bar-label">Homepage (supersub.co.nz)</div>
+            <div class="seo-bar-track"><div class="seo-bar-fill" style="width:100%"></div></div>
+            <div class="seo-bar-val">1,019</div>
+          </div>
+          <div class="seo-bar-row">
+            <div class="seo-bar-label">Super Panel Product Page</div>
+            <div class="seo-bar-track"><div class="seo-bar-fill blue" style="width:38%"></div></div>
+            <div class="seo-bar-val">384</div>
+          </div>
+          <div class="seo-bar-row">
+            <div class="seo-bar-label">Snaplock Wall Page</div>
+            <div class="seo-bar-track"><div class="seo-bar-fill blue" style="width:6.5%"></div></div>
+            <div class="seo-bar-val">67</div>
+          </div>
+          <div class="seo-bar-row">
+            <div class="seo-bar-label">Article: SIP Homes Guide <small style="color:var(--lgray)">(3M only)</small></div>
+            <div class="seo-bar-track"><div class="seo-bar-fill red" style="width:9%"></div></div>
+            <div class="seo-bar-val">92</div>
+          </div>
+          <div class="seo-bar-row">
+            <div class="seo-bar-label">Article: Modular Comparison</div>
+            <div class="seo-bar-track"><div class="seo-bar-fill red" style="width:3.8%"></div></div>
+            <div class="seo-bar-val">39</div>
+          </div>
+        </div>
+
+        <div class="content-cols reveal">
+          <div>
+            <div class="block-title">The Shift That Matters</div>
+            <p class="block-body">
+              Traffic used to depend almost entirely on branded queries — people who already knew Supersub. That's <strong>not acquisition, it's retention.</strong>
+              <br><br>
+              The content strategy shifted toward non-branded, intent-based keywords: "SIP homes NZ," "modular home comparison," "snaplock wall cost." People who have never heard of Supersub but are actively searching for what Supersub sells.
+              <br><br>
+              Homepage position improvement from <strong>37.23 → 15.19</strong> in 6 months reflects this new keyword targeting — without link building.
+            </p>
+          </div>
+          <div>
+            <div class="block-title">Data-Informed Iteration</div>
+            <p class="block-body">
+              The Modular Comparison article recorded the <strong>highest average engagement time (142 seconds)</strong> of any page — readers finish it. But zero leads converted from it.
+              <br><br>
+              Diagnosis: the content is excellent, the CTA architecture is not. The next iteration targets this gap — introducing a direct path from article → quote request at the point of peak engagement.
+              <br><br>
+              This is what separates data-informed SEO from blog writing.
+            </p>
+          </div>
+        </div>
+
+        <div class="block-title" style="margin-bottom:20px;">GA4 Lead Events by Page</div>
+        <div class="stat-grid stat-grid-3 reveal">
+          <div class="stat-cell dark">
+            <div class="stat-label">Homepage</div>
+            <div class="stat-value"><span class="stat-blue">19</span></div>
+            <div class="stat-note">generate_lead events tracked</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-label">Portable Bathrooms Page</div>
+            <div class="stat-value">4</div>
+            <div class="stat-note">generate_lead events tracked</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-label">Homepage Engagement Rate</div>
+            <div class="stat-value">62.1%</div>
+            <div class="stat-note">120s avg session duration</div>
+          </div>
+        </div>
+
+        <div class="insight">
+          <div class="insight-label">Geographic Insight</div>
+          <div class="insight-text">
+            Top user regions: Auckland 1,503 users · Canterbury 845 · Wellington 515. Auckland dominance aligns with the highest concentration of construction activity in NZ — the content is reaching the right geography without geo-targeting.
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════
+           06 — CRM & DASHBOARDS
+      ══════════════════════════════════════ -->
+      <section id="dashboards" class="chapter reveal">
+        <div class="ch-eyebrow">
+          <span class="ch-num">06</span>
+          <span class="ch-tag">Systems</span>
+        </div>
+        <h2 class="ch-title">Two dashboards.<br><em>Built from scratch.</em></h2>
+        <p class="ch-lead">
+          When the tools available didn't fit the workflow, they got replaced. A custom CRM was built to handle lead capture, pipeline tracking, and automated quote delivery. A Content Dashboard centralises every asset, caption, and content framework the team produces.
+        </p>
+
+        <!-- CRM DASHBOARD -->
+        <div class="block-title" style="margin-bottom:20px;">CRM &amp; Sales Dashboard</div>
+
+        <div class="dash-showcase reveal">
+          <div class="dash-header">
+            <div>
+              <div class="dash-header-title">Supersub CRM</div>
+              <div class="dash-header-sub">quotation-and-sales-dashboard.vercel.app · Live</div>
+            </div>
+            <span class="dash-tag">Live</span>
+          </div>
+          <div class="dash-body">
+            <div class="dash-kpi-row">
+              <div class="dash-kpi">
+                <div class="dash-kpi-label">Pipeline Value</div>
+                <div class="dash-kpi-value accent">$65,380</div>
+                <div class="dash-kpi-note">All open quotes</div>
+              </div>
+              <div class="dash-kpi">
+                <div class="dash-kpi-label">Total Leads</div>
+                <div class="dash-kpi-value">10</div>
+                <div class="dash-kpi-note">This month snapshot</div>
+              </div>
+              <div class="dash-kpi">
+                <div class="dash-kpi-label">Quotes Sent</div>
+                <div class="dash-kpi-value">5</div>
+                <div class="dash-kpi-note">Awaiting response</div>
+              </div>
+              <div class="dash-kpi">
+                <div class="dash-kpi-label">Quote → Send Rate</div>
+                <div class="dash-kpi-value">40%</div>
+                <div class="dash-kpi-note">Lead in → quote out</div>
+              </div>
+            </div>
+            <div class="dash-funnel">
+              <div class="funnel-row">
+                <div class="funnel-label">Lead In</div>
+                <div class="funnel-bar-track">
+                  <div class="funnel-bar-fill" style="width:100%;background:#2563ff;">10 leads</div>
+                </div>
+                <div class="funnel-num">100%</div>
+              </div>
+              <div class="funnel-row">
+                <div class="funnel-label">Quote Sent</div>
+                <div class="funnel-bar-track">
+                  <div class="funnel-bar-fill" style="width:40%;background:#3b82f6;">4 leads</div>
+                </div>
+                <div class="funnel-num">40%</div>
+              </div>
+              <div class="funnel-row">
+                <div class="funnel-label">Responded</div>
+                <div class="funnel-bar-track">
+                  <div class="funnel-bar-fill" style="width:5%;background:rgba(255,255,255,.15);"></div>
+                </div>
+                <div class="funnel-num" style="color:rgba(255,255,255,.2)">Tracking</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-list reveal">
+          <div class="feature-item">
+            <div class="feature-icon">📥</div>
+            <div class="feature-text">
+              <div class="feature-name">Multi-Channel Lead Capture</div>
+              <div class="feature-desc">Automatically captures leads from website forms and Meta/Facebook Ads. Each lead is tagged by source, scored, and enters the pipeline in real-time.</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">⭐</div>
+            <div class="feature-text">
+              <div class="feature-name">Lead Scoring System</div>
+              <div class="feature-desc">Leads are automatically scored based on intent signals. General enquiries score 15; specific product enquiries (e.g. "2.4m Portable Bathroom") score 35. Sales team prioritises accordingly.</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">📄</div>
+            <div class="feature-text">
+              <div class="feature-name">Quote Builder &amp; Automated Email Delivery</div>
+              <div class="feature-desc">Templates built per product line (SS-PB, etc). Generate a branded quote with product details, pricing, validity date and delivery location — sent directly to the customer's inbox with one click. Quote numbering auto-increments (SS-PB-2026-003).</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🔐</div>
+            <div class="feature-text">
+              <div class="feature-name">Invite-Only Authentication</div>
+              <div class="feature-desc">Role-based access control — only team members invited by email can sign up and log in. Lead and pipeline data is protected from public access.</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">⚡</div>
+            <div class="feature-text">
+              <div class="feature-name">Built in Under 1 Month</div>
+              <div class="feature-desc">Designed, developed and deployed while managing all other Supersub marketing deliverables simultaneously. Replaced HubSpot — saving $800+/month in SaaS costs.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTENT DASHBOARD -->
+        <div class="block-title" style="margin-bottom:20px; margin-top: 56px;">Content Dashboard</div>
+        <p class="ch-lead" style="margin-bottom:32px;">
+          A centralised hub for every piece of content Supersub produces — carousels, videos, captions, scheduling, content frameworks, and ad strategy. No Google Drive folders, no scattered documents.
+        </p>
+
+        <div class="feature-list reveal">
+          <div class="feature-item">
+            <div class="feature-icon">🗂️</div>
+            <div class="feature-text">
+              <div class="feature-name">Content Library</div>
+              <div class="feature-desc">10 carousels, 60+ slides, 8 videos — all stored with thumbnails, captions, hashtags, and production dates. Reviewable in a single view.</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">💬</div>
+            <div class="feature-text">
+              <div class="feature-name">Manager Feedback System</div>
+              <div class="feature-desc">Managers can open any carousel or video and leave structured feedback — comments are attached to the specific piece of content, not buried in Slack threads.</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">📅</div>
+            <div class="feature-text">
+              <div class="feature-name">Schedule to Buffer</div>
+              <div class="feature-desc">Direct integration with Buffer for post scheduling. Select platforms (Instagram, Facebook, TikTok, LinkedIn Reg, LinkedIn Supersub, YouTube), pick NZ date &amp; time — scheduled in one step.</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🗺️</div>
+            <div class="feature-text">
+              <div class="feature-name">Content Framework Documentation</div>
+              <div class="feature-desc">12 content categories, 5 pillars, 120+ topic ideas mapped per product line (Snaplock Wall, SIP Panel). Recommended monthly content mix visualised: 25% Educate, 15% Problem, 25% Solution, 20% Trust, 15% Convert.</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🚀</div>
+            <div class="feature-text">
+              <div class="feature-name">Roadmap: Unified Analytics</div>
+              <div class="feature-desc">Next phase: all platform analytics (TikTok, IG, Facebook, YouTube) pulled into one dashboard. Campaign performance, SEO data, and creative asset results — all in a single source of truth.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="insight blue-accent">
+          <div class="insight-label">Why This Exists</div>
+          <div class="insight-text">
+            Most marketing teams run on Notion docs, Google Drive folders, and WhatsApp threads. These tools were built specifically for how Supersub works — with the workflows, terminology, and data structure that actually fits the business. That's the difference between using software and building it.
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════
+           07 — IMPACT SUMMARY
+      ══════════════════════════════════════ -->
+      <section id="impact" class="chapter reveal">
+        <div class="ch-eyebrow">
+          <span class="ch-num">07</span>
+          <span class="ch-tag">Impact</span>
+        </div>
+        <h2 class="ch-title">The full<br><em>picture.</em></h2>
+        <p class="ch-lead">
+          Three years of building, testing, iterating, and shipping. Not just running campaigns — engineering a complete digital growth system from the ground up.
+        </p>
+
+        <div class="impact-hero reveal">
+          <div class="impact-title">
+            One person.<br>
+            <span>The output of a full team.</span>
+          </div>
+          <div class="impact-body">
+            A typical company would need a social media manager, a paid ads specialist, an SEO consultant, a developer, and a data analyst to cover what's been built here. <strong>Supersub has one digital marketer who thinks in systems, executes across channels, and builds the infrastructure that connects them.</strong>
+          </div>
+        </div>
+
+        <div class="pillars-grid reveal">
+          <div class="pillar-card">
+            <div class="pillar-icon">📱</div>
+            <div class="pillar-name">5 Channels Managed</div>
+            <div class="pillar-desc">TikTok, Instagram, Facebook, YouTube, LinkedIn — all coordinated, all with defined roles in the funnel.</div>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-icon">🎯</div>
+            <div class="pillar-name">$3.87 Avg CPL</div>
+            <div class="pillar-desc">1,478 leads generated for a $7,900+ product. Industry benchmark: $50–$200+. Every lead is tracked, scored, and followed up.</div>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-icon">🔍</div>
+            <div class="pillar-name">SEO From Zero</div>
+            <div class="pillar-desc">Homepage position 37 → 15 in 6 months. Articles approaching homepage traffic in 3 months. Snaplock Wall page: 33× click growth.</div>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-icon">⚙️</div>
+            <div class="pillar-name">Custom CRM Built</div>
+            <div class="pillar-desc">Replaced HubSpot ($800+/month). Lead scoring, pipeline tracking, and automated quote delivery — deployed in under 1 month.</div>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-icon">📊</div>
+            <div class="pillar-name">Content System Built</div>
+            <div class="pillar-desc">12 categories, 5 pillars, 120+ ideas mapped. All content organised, captioned, and schedulable from one custom dashboard.</div>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-icon">🤖</div>
+            <div class="pillar-name">AI Automation (Next)</div>
+            <div class="pillar-desc">n8n-based research automation and Remotion for programmatic video — infrastructure being built to scale content and ops without scaling headcount.</div>
+          </div>
+        </div>
+
+        <div class="content-cols reveal">
+          <div>
+            <div class="block-title">What This Represents</div>
+            <p class="block-body">
+              This is not a portfolio of campaigns. It's a case study in building a <strong>digital growth system</strong> — the strategy, the execution, the data layer, and the tools that hold it all together.
+              <br><br>
+              The skills used here: content strategy, paid media, SEO, landing page optimization, full-stack development, product thinking, data analysis. Each skill informs the others. That's what makes it a system and not a collection of tactics.
+            </p>
+          </div>
+          <div>
+            <div class="block-title">Still In Progress</div>
+            <p class="block-body">
+              The Supersub engagement is ongoing. Next priorities: unified analytics inside the Content Dashboard, DM automation for lead follow-up, deeper n8n automation for competitor research and content ideation, and conversion rate optimization on the article CTA gap identified in the SEO audit.
+              <br><br>
+              A system is never finished — it's iterated. That's the point.
+            </p>
+          </div>
+        </div>
+
+        <!-- Back to portfolio -->
+        <div style="margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--line); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:24px;">
+          <div>
+            <div style="font-size:13px;color:var(--lgray);letter-spacing:var(--ls-normal);margin-bottom:6px;">Ready to work together?</div>
+            <div style="font-size:20px;font-weight:800;letter-spacing:var(--ls-tight);color:var(--black);">Let's build something that actually works.</div>
+          </div>
+          <a href="index.html" style="display:inline-flex;align-items:center;gap:12px;padding:12px 12px 12px 28px;background:var(--black);color:var(--white);font-size:15px;font-weight:600;text-decoration:none;border-radius:100px;letter-spacing:var(--ls-normal);transition:background .2s,transform .15s;" onmouseover="this.style.background='#222'" onmouseout="this.style.background='var(--black)'">
+            Back to Portfolio
+            <span style="width:36px;height:36px;background:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#0d0d0d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h8M9 5l3 3-3 3"/></svg>
+            </span>
+          </a>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script>
+    /* ── Custom cursor ── */
+    const dot  = document.getElementById('curDot');
+    const ring = document.getElementById('curRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    (function raf() {
+      dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px'; ring.style.top  = ry + 'px';
+      requestAnimationFrame(raf);
+    })();
+
+    /* ── Sidebar active chapter tracking ── */
+    const sections = document.querySelectorAll('.chapter, #overview');
+    const links    = document.querySelectorAll('#sidebarNav a');
+    const NAV_H    = 72;
+
+    function onScroll() {
+      let current = '';
+      sections.forEach(sec => {
+        if (window.scrollY + NAV_H + 80 >= sec.offsetTop) current = sec.id;
+      });
+      links.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* ── Scroll reveal ── */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
