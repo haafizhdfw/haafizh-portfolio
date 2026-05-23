@@ -515,16 +515,48 @@
     .about-card-services-list li {
       font-size: 16px; font-weight: 500; color: var(--black);
       letter-spacing: -0.03em;
+      display: flex; flex-direction: column;
+      padding: 0;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .about-card-services-list li .svc-row {
       display: flex; align-items: center; justify-content: space-between;
       padding: 14px 0;
-      border-bottom: 1px solid var(--line);
       transition: padding-left 0.2s;
-      cursor: default;
     }
-    .about-card-services-list li:hover { padding-left: 8px; }
-    .about-card-services-list li::after {
-      content: '→'; color: var(--lgray);
+    .about-card-services-list li:hover .svc-row { padding-left: 8px; }
+    .about-card-services-list li .svc-row::after {
+      content: '+'; color: var(--lgray);
+      font-size: 20px; font-weight: 300;
       flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+    .about-card-services-list li.open .svc-row::after {
+      transform: rotate(45deg);
+    }
+    /* Tool chips panel */
+    .svc-tools {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding-bottom 0.35s ease;
+      padding-bottom: 0;
+    }
+    .about-card-services-list li.open .svc-tools {
+      max-height: 200px;
+      padding-bottom: 14px;
+    }
+    .tool-chip {
+      display: inline-flex; align-items: center;
+      background: var(--bg);
+      border: 1.5px solid var(--line);
+      border-radius: 100px;
+      font-size: 11px; font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      padding: 4px 12px;
+      white-space: nowrap;
     }
 
     /* ─────────────────────────────────────────────
@@ -972,12 +1004,81 @@
       <div class="about-card-body">
         <div class="about-card-services-label">My Services</div>
         <ul class="about-card-services-list">
-          <li>Social Media Strategy &amp; Management</li>
-          <li>Meta Ads &amp; Paid Campaign Management</li>
-          <li>SEO &amp; Landing Page Optimization</li>
-          <li>Custom CRM &amp; Sales Dashboard Dev</li>
-          <li>Marketing Automation &amp; AI Workflows</li>
-          <li>Creative Content &amp; Brand Design</li>
+
+          <li>
+            <div class="svc-row">Social Media Strategy &amp; Management</div>
+            <div class="svc-tools">
+              <span class="tool-chip">TikTok Creative Center</span>
+              <span class="tool-chip">Buffer</span>
+              <span class="tool-chip">Content Dashboard</span>
+              <span class="tool-chip">LinkedIn</span>
+              <span class="tool-chip">Instagram</span>
+              <span class="tool-chip">YouTube Shorts</span>
+              <span class="tool-chip">Facebook</span>
+              <span class="tool-chip">Meta Business Suite</span>
+              <span class="tool-chip">Claude AI</span>
+            </div>
+          </li>
+
+          <li>
+            <div class="svc-row">Meta Ads &amp; Paid Campaign Management</div>
+            <div class="svc-tools">
+              <span class="tool-chip">Ads Manager</span>
+              <span class="tool-chip">Meta Pixel</span>
+              <span class="tool-chip">Meta Business Suite</span>
+              <span class="tool-chip">Canva</span>
+              <span class="tool-chip">Claude AI</span>
+            </div>
+          </li>
+
+          <li>
+            <div class="svc-row">SEO &amp; Landing Page Optimization</div>
+            <div class="svc-tools">
+              <span class="tool-chip">Google Search Console</span>
+              <span class="tool-chip">Google Analytics</span>
+              <span class="tool-chip">Ahrefs</span>
+              <span class="tool-chip">Yoast SEO</span>
+              <span class="tool-chip">PageSpeed Insights</span>
+              <span class="tool-chip">WordPress</span>
+              <span class="tool-chip">Claude AI</span>
+            </div>
+          </li>
+
+          <li>
+            <div class="svc-row">Custom CRM &amp; Sales Dashboard Dev</div>
+            <div class="svc-tools">
+              <span class="tool-chip">Claude AI</span>
+              <span class="tool-chip">GitHub</span>
+              <span class="tool-chip">Vercel</span>
+              <span class="tool-chip">Supabase</span>
+              <span class="tool-chip">Brevo</span>
+              <span class="tool-chip">n8n</span>
+            </div>
+          </li>
+
+          <li>
+            <div class="svc-row">Marketing Automation &amp; AI Workflows</div>
+            <div class="svc-tools">
+              <span class="tool-chip">n8n</span>
+              <span class="tool-chip">Apify</span>
+              <span class="tool-chip">Claude AI</span>
+              <span class="tool-chip">Remotion</span>
+            </div>
+          </li>
+
+          <li>
+            <div class="svc-row">Creative Content &amp; Brand Design</div>
+            <div class="svc-tools">
+              <span class="tool-chip">Figma</span>
+              <span class="tool-chip">Canva</span>
+              <span class="tool-chip">CapCut</span>
+              <span class="tool-chip">Remotion</span>
+              <span class="tool-chip">Claude AI</span>
+              <span class="tool-chip">Google Flow</span>
+              <span class="tool-chip">Nano Banana</span>
+            </div>
+          </li>
+
         </ul>
       </div>
     </div>
@@ -1193,6 +1294,17 @@
     document.querySelectorAll('.reveal').forEach((el,i) => {
       el.style.transitionDelay = (i%5)*70+'ms';
       io.observe(el);
+    });
+
+    /* Service chips toggle */
+    document.querySelectorAll('.about-card-services-list li').forEach(li => {
+      li.addEventListener('click', () => {
+        const isOpen = li.classList.contains('open');
+        // close all first
+        document.querySelectorAll('.about-card-services-list li').forEach(el => el.classList.remove('open'));
+        // open clicked if it was closed
+        if (!isOpen) li.classList.add('open');
+      });
     });
   </script>
 </body>
