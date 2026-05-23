@@ -181,14 +181,16 @@
       color: var(--red);
     }
 
-    /* ® badge — top-aligned, large, after the period */
+    /* ® badge — top-aligned, nudged down and left */
     .hero-reg {
-      font-size: 0.34em;   /* relative to .hero-name → ~99px at 290px */
+      font-size: 0.34em;
       font-weight: 400;
       color: var(--black);
       letter-spacing: 0;
       vertical-align: top;
-      margin-left: 0.08em;
+      position: relative;
+      top: 0.18em;
+      margin-left: 0.02em;
     }
 
     .hero-name-wrap {
