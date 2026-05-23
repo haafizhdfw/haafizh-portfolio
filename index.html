@@ -578,10 +578,12 @@
       text-decoration: none;
       flex: 1;
       gap: 12px;
-      transition: opacity 0.2s;
+      transition: background .2s, transform .15s;
     }
-    .btn-getstarted:hover { opacity: 0.85; }
+    .btn-getstarted:hover { background: #b8e600; transform: scale(1.03); }
+    .btn-getstarted:hover .btn-getstarted-icon { transform: rotate(45deg); }
     .btn-getstarted-icon {
+      transition: transform .2s;
       width: 44px; height: 44px; flex-shrink: 0;
       background: var(--white);
       border-radius: 50%;
@@ -1148,12 +1150,6 @@
             </span>
           </a>
           <a href="#projects" class="btn-mywork">My Work</a>
-        </div>
-        <div class="card-location">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
-          </svg>
-          Located in <strong>Indonesia</strong>, available worldwide
         </div>
       </div>
 
