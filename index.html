@@ -404,10 +404,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-top: -100px; /* pull up so strap connects to stats bar */
     }
     .lanyard-strap {
       width: 28px;
-      height: 88px;
+      height: 188px; /* taller to bridge the gap to stats bar */
       background: #0000FF;
       border-radius: 6px 6px 0 0;
       flex-shrink: 0;
@@ -456,7 +457,7 @@
     /* Card header: circular photo left + info right */
     .about-card-header {
       display: flex; align-items: center; gap: 28px;
-      padding: 36px 36px 30px;
+      padding: 56px 36px 30px;
       border-bottom: 1px solid var(--line);
     }
     .about-card-photo {
