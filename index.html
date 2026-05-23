@@ -397,14 +397,61 @@
     .services-list li:hover { padding-left: 10px; }
     .services-list li::after { content: '→'; color: var(--lgray); }
 
+    /* ── Lanyard wrapper (sticky container) ── */
+    .about-card-outer {
+      position: sticky;
+      top: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .lanyard-strap {
+      width: 28px;
+      height: 88px;
+      background: #0000FF;
+      border-radius: 6px 6px 0 0;
+      flex-shrink: 0;
+    }
+    .lanyard-clip {
+      width: 68px;
+      height: 30px;
+      background: var(--black);
+      border-radius: 8px 8px 0 0;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+    }
+    .lanyard-clip::after {
+      content: '';
+      position: absolute;
+      bottom: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 22px;
+      height: 22px;
+      background: var(--black);
+      border-radius: 0 0 6px 6px;
+    }
+    /* Card hole at top */
+    .card-hole {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 64px;
+      height: 22px;
+      background: var(--bg);
+      border-radius: 100px;
+      border: 2px solid var(--line);
+      z-index: 10;
+    }
     /* ── Right: Profile Card ── */
     .about-card {
       background: var(--white);
       border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 2px 32px rgba(0,0,0,0.07);
-      position: sticky;
-      top: 108px;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.10);
+      position: relative;
+      width: 100%;
     }
     /* Card header: circular photo left + info right */
     .about-card-header {
@@ -755,7 +802,7 @@
       .stat-item { min-width: 50%; flex: none; }
 
       #about { grid-template-columns: 1fr; padding: 80px 24px; }
-      .about-card { max-width: 340px; position: static; }
+      .about-card-outer { max-width: 380px; position: static; }
       #logos { padding: 40px 0; }
       .logos-label { padding: 0 24px; }
       .projects-head { padding: 0 24px; flex-direction: column; align-items: flex-start; gap: 12px; }
@@ -885,8 +932,12 @@
 
     </div>
 
-    <!-- Profile Card -->
-    <div class="about-card reveal">
+    <!-- Profile Card with Lanyard -->
+    <div class="about-card-outer reveal">
+      <div class="lanyard-strap"></div>
+      <div class="lanyard-clip"></div>
+    <div class="about-card">
+      <div class="card-hole"></div>
 
       <!-- Header: circular photo + name/role/socials -->
       <div class="about-card-header">
@@ -929,6 +980,7 @@
         </ul>
       </div>
     </div>
+    </div><!-- end about-card-outer -->
   </section>
 
   <!-- ══════════════ LOGOS ══════════════ -->
