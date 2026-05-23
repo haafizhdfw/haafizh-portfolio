@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Haafizh Daffa — Graphic Designer</title>
+  <title>Haafizh Daffa — Digital Marketing Systems Builder</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -537,6 +537,56 @@
     }
 
     /* ─────────────────────────────────────────────
+       PROJECT CATEGORY LABELS
+    ───────────────────────────────────────────── */
+    .proj-category-label {
+      padding: 28px 48px;
+      display: flex; align-items: baseline; gap: 16px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: var(--bg);
+    }
+    .cat-num {
+      font-size: 11px; font-weight: 700; letter-spacing: .2em;
+      color: var(--lgray);
+    }
+    .cat-name {
+      font-size: 22px; font-weight: 800;
+      letter-spacing: var(--ls-tight); color: var(--black);
+    }
+    .cat-desc {
+      font-size: 13px; color: var(--gray);
+      letter-spacing: var(--ls-normal); margin-left: 4px;
+    }
+
+    /* Featured Supersub card */
+    .proj-featured {
+      height: 360px !important;
+    }
+    .proj-tagline {
+      font-size: 13px; color: rgba(255,255,255,.5);
+      margin-top: 6px; max-width: 480px;
+      line-height: 1.5; letter-spacing: var(--ls-normal);
+    }
+
+    /* Metrics chips in top-right of featured card */
+    .proj-metrics {
+      position: absolute; top: 32px; right: 48px;
+      display: flex; flex-wrap: wrap; gap: 8px;
+      justify-content: flex-end; z-index: 3;
+      max-width: 380px;
+    }
+    .metric-chip {
+      padding: 6px 14px;
+      border: 1px solid rgba(255,255,255,.2);
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(8px);
+      font-size: 11px; font-weight: 600;
+      letter-spacing: .08em; color: rgba(255,255,255,.8);
+      border-radius: 100px;
+    }
+
+    /* ─────────────────────────────────────────────
        CONTACT
     ───────────────────────────────────────────── */
     #contact {
@@ -680,7 +730,7 @@
           <span class="hero-reg">®</span>
         </div>
       </div>
-      <p class="hero-subtitle">Personal Portfolio</p>
+      <p class="hero-subtitle">Digital Marketing Systems Builder</p>
     </div>
 
     <!-- Chair photo — PNG transparent preferred -->
@@ -698,17 +748,17 @@
 
     <!-- Bottom-left tagline -->
     <div class="hero-tagline">
-      Developing cohesive brands with<br />
-      <em>distinctive</em> visuals &amp; <em>engaging</em> content
+      Building systems that turn<br />
+      <em>data</em> into decisions &amp; <em>decisions</em> into growth
     </div>
 
     <!-- Bottom-right copyright -->
     <div class="hero-copyright">
       <div class="hero-year">© 2025</div>
       <div class="hero-year-desc">
-        This storyboard contains stories about<br />
-        my journey in searching the meaning of<br />
-        an ability to create powerful digital assets
+        I don't just run campaigns —<br />
+        I build the infrastructure<br />
+        behind them.
       </div>
     </div>
 
@@ -717,20 +767,20 @@
   <!-- ══════════════ STATS BAR ══════════════ -->
   <div class="stats-bar">
     <div class="stat-item reveal">
-      <div class="stat-n">10+</div>
-      <div class="stat-l">Satisfied Clients</div>
+      <div class="stat-n">292K+</div>
+      <div class="stat-l">TikTok Views · NZ Market</div>
     </div>
     <div class="stat-item reveal">
-      <div class="stat-n">3+</div>
-      <div class="stat-l">Years of Experience</div>
+      <div class="stat-n">1,478</div>
+      <div class="stat-l">Leads via Paid Campaigns</div>
     </div>
     <div class="stat-item reveal">
-      <div class="stat-n">20+</div>
-      <div class="stat-l">Projects Finished</div>
+      <div class="stat-n">$3.87</div>
+      <div class="stat-l">Avg. Cost Per Lead</div>
     </div>
     <div class="stat-item reveal" style="flex:1.4">
-      <div class="stat-n" style="font-size:18px;line-height:1.4;font-weight:700;letter-spacing:-0.03em;">Graphic Designer</div>
-      <div class="stat-l">Based in Indonesia</div>
+      <div class="stat-n" style="font-size:18px;line-height:1.4;font-weight:700;letter-spacing:-0.03em;">3 Years · Supersub NZ</div>
+      <div class="stat-l">Digital Marketing Systems Builder</div>
     </div>
   </div>
 
@@ -743,26 +793,31 @@
 
       <div class="about-hi reveal">
         Hi! I'm <span class="hl-name">Haafizh Daffa</span>,
-        a <span class="hl-role">Graphic Designer</span>
-        from <span class="hl-country">Indonesia</span>,
-        turning your ideas into
-        pixel&#8209;perfect realities
+        a <span class="hl-role">Digital Marketing Systems Builder</span>
+        from <span class="hl-country">Indonesia</span> —
+        I build the tools, run the channels,
+        and read the data.
       </div>
 
       <p class="about-bio reveal">
-        I craft visual identities, brand systems, and design experiences
-        that communicate clearly and leave a lasting impression. Every project
-        starts with a deep dive into your story — and ends with something
-        that feels unmistakably yours.
+        Most marketers use the tools. I build them. Over 3 years managing
+        full-stack digital marketing for Supersub NZ — a B2B construction
+        company — I've built a custom CRM dashboard, a content intelligence
+        system, and automated pipelines that replaced what would otherwise
+        require 3–4 separate hires. Every decision I make is rooted in
+        consumer behavior data, not trends. Because a video with
+        1M views that drives 10 sales is worth less than one with
+        10K views that drives 50.
       </p>
 
-      <div class="services-label">My Services</div>
+      <div class="services-label">What I Do</div>
       <ul class="services-list">
-        <li class="reveal">Brand Identity &amp; Logo Design</li>
-        <li class="reveal">Social Media Design</li>
-        <li class="reveal">Print &amp; Editorial Design</li>
-        <li class="reveal">UI / UX Design</li>
-        <li class="reveal">Illustration &amp; Motion Graphics</li>
+        <li class="reveal">Social Media Strategy &amp; Management</li>
+        <li class="reveal">Meta Ads &amp; Paid Campaign Management</li>
+        <li class="reveal">SEO &amp; Landing Page Optimization</li>
+        <li class="reveal">Custom CRM &amp; Sales Dashboard Development</li>
+        <li class="reveal">Marketing Automation &amp; AI Workflows (n8n, Remotion)</li>
+        <li class="reveal">Creative Content &amp; Brand Design</li>
       </ul>
     </div>
 
@@ -774,7 +829,7 @@
       />
       <div class="about-namecard">
         <div class="about-namecard-name">Haafizh Daffa</div>
-        <div class="about-namecard-role">Graphic Designer</div>
+        <div class="about-namecard-role">Digital Marketing Systems Builder</div>
         <div class="about-namecard-loc">Indonesia — Available Worldwide</div>
       </div>
     </div>
@@ -809,14 +864,53 @@
     <div class="projects-head reveal">
       <div class="projects-title">projects.</div>
       <div class="projects-desc">
-        I've helped businesses across industries achieve their goals.
-        Here are some recent projects.
+        Two disciplines. One system thinker.
+        Work divided by depth and domain.
       </div>
     </div>
 
-    <div class="project-list">
+    <!-- ── CATEGORY 01: DIGITAL MARKETING ── -->
+    <div class="proj-category-label reveal">
+      <span class="cat-num">01 /</span>
+      <span class="cat-name">Digital Marketing</span>
+      <span class="cat-desc">Strategy · Campaigns · CRM · Automation</span>
+    </div>
 
-      <div class="proj-row with-img reveal">
+    <div class="project-list">
+      <!-- Supersub — featured card -->
+      <a href="supersub.html" class="proj-row proj-featured reveal" style="text-decoration:none;">
+        <div class="proj-bg" style="background-image:url('extracted_17_4096x2731.jpeg'); filter:brightness(.35) saturate(.8);"></div>
+        <!-- Metrics overlay top-right -->
+        <div class="proj-metrics">
+          <div class="metric-chip">292K TikTok Views</div>
+          <div class="metric-chip">1,478 Leads</div>
+          <div class="metric-chip">$3.87 Avg CPL</div>
+          <div class="metric-chip">3 Yrs · NZ Construction</div>
+        </div>
+        <div class="proj-inner">
+          <div class="proj-left">
+            <div class="proj-num">/001/</div>
+            <div class="proj-cat">{ Social Media } { Paid Ads } { CRM } { SEO } { AI Automation }</div>
+            <div class="proj-name">Supersub NZ</div>
+            <div class="proj-tagline">Full-stack digital marketing — built the systems, ran the channels, read the data.</div>
+          </div>
+          <div class="proj-right">
+            <div class="proj-year">/2022–Present</div>
+            <div class="proj-arrow">↗</div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- ── CATEGORY 02: CREATIVE CONTENT ── -->
+    <div class="proj-category-label reveal" style="margin-top:64px;">
+      <span class="cat-num">02 /</span>
+      <span class="cat-name">Creative Content</span>
+      <span class="cat-desc">Brand Identity · Social Media Design · Visual Direction</span>
+    </div>
+
+    <div class="project-list">
+      <a href="sepasi.html" class="proj-row with-img reveal" style="text-decoration:none;">
         <div class="proj-bg" style="background-image:url('extracted_17_4096x2731.jpeg');"></div>
         <div class="proj-inner">
           <div class="proj-left">
@@ -829,13 +923,13 @@
             <div class="proj-arrow">↗</div>
           </div>
         </div>
-      </div>
+      </a>
 
-      <div class="proj-row reveal">
+      <a href="voilene.html" class="proj-row reveal" style="text-decoration:none;">
         <div class="proj-inner">
           <div class="proj-left">
             <div class="proj-num">/002/</div>
-            <div class="proj-cat">{ Social Media } { Photoshoot Management }</div>
+            <div class="proj-cat">{ Social Media } { Photoshoot Direction }</div>
             <div class="proj-name">Voilene Etoile</div>
           </div>
           <div class="proj-right">
@@ -843,9 +937,9 @@
             <div class="proj-arrow">↗</div>
           </div>
         </div>
-      </div>
+      </a>
 
-      <div class="proj-row reveal">
+      <a href="npure.html" class="proj-row reveal" style="text-decoration:none;">
         <div class="proj-inner">
           <div class="proj-left">
             <div class="proj-num">/003/</div>
@@ -857,9 +951,9 @@
             <div class="proj-arrow">↗</div>
           </div>
         </div>
-      </div>
+      </a>
 
-      <div class="proj-row reveal">
+      <a href="granova.html" class="proj-row reveal" style="text-decoration:none;">
         <div class="proj-inner">
           <div class="proj-left">
             <div class="proj-num">/004/</div>
@@ -871,8 +965,35 @@
             <div class="proj-arrow">↗</div>
           </div>
         </div>
-      </div>
+      </a>
 
+      <a href="bakti.html" class="proj-row reveal" style="text-decoration:none;">
+        <div class="proj-inner">
+          <div class="proj-left">
+            <div class="proj-num">/005/</div>
+            <div class="proj-cat">{ Brand Identity }</div>
+            <div class="proj-name">Bakti Millenial</div>
+          </div>
+          <div class="proj-right">
+            <div class="proj-year">/2022</div>
+            <div class="proj-arrow">↗</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="pepsodent.html" class="proj-row reveal" style="text-decoration:none;">
+        <div class="proj-inner">
+          <div class="proj-left">
+            <div class="proj-num">/006/</div>
+            <div class="proj-cat">{ Creative Campaign }</div>
+            <div class="proj-name">Pepsodent</div>
+          </div>
+          <div class="proj-right">
+            <div class="proj-year">/2022</div>
+            <div class="proj-arrow">↗</div>
+          </div>
+        </div>
+      </a>
     </div>
   </section>
 
@@ -896,7 +1017,7 @@
   <!-- ══════════════ FOOTER ══════════════ -->
   <footer>
     <a href="#hero" class="f-logo"><img src="logo-portfolio.svg" alt="hd." style="height:32px;opacity:.3;filter:invert(1);"/></a>
-    <p>© 2025 Haafizh Daffa — Graphic Designer</p>
+    <p>© 2026 Haafizh Daffa — Digital Marketing Systems Builder</p>
     <p>Indonesia</p>
   </footer>
 
