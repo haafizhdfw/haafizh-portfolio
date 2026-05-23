@@ -82,10 +82,10 @@
       display: block;
     }
 
-    /* Center links */
+    /* Center links — flex, naturally centered between logo and right */
     .nav-center {
-      position: absolute; left: 50%; transform: translateX(-50%);
-      display: flex; gap: 56px; list-style: none;
+      flex: 1;
+      display: flex; justify-content: center; gap: 56px; list-style: none;
     }
     .nav-center a {
       font-size: 18px; font-weight: 500;
@@ -97,8 +97,8 @@
 
     /* Right side */
     .nav-right {
-      margin-left: auto;
       display: flex; align-items: center; gap: 32px;
+      flex-shrink: 0;
     }
     .nav-email {
       font-size: 18px; font-weight: 400;
