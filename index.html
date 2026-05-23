@@ -181,14 +181,14 @@
       color: var(--red);
     }
 
-    /* ® badge — inline superscript, relative to .hero-name font-size */
+    /* ® badge — top-aligned, large, after the period */
     .hero-reg {
-      font-size: 0.28em;   /* 0.28 × 290px ≈ 81px */
+      font-size: 0.34em;   /* relative to .hero-name → ~99px at 290px */
       font-weight: 400;
       color: var(--black);
       letter-spacing: 0;
-      vertical-align: 0.52em;
-      margin-left: 0.04em;
+      vertical-align: top;
+      margin-left: 0.08em;
     }
 
     .hero-name-wrap {
@@ -721,7 +721,7 @@
     <!-- Big name -->
     <div class="hero-name-block">
       <div class="hero-name-wrap">
-        <span class="hero-name">h<span class="hero-ar">ar</span>ris<span class="hero-reg">®</span><span class="hero-period-text">.</span></span>
+        <span class="hero-name">h<span class="hero-ar">ar</span>ris<span class="hero-period-text">.</span><span class="hero-reg">®</span></span>
       </div>
       <p class="hero-subtitle">Personal Portfolio</p>
     </div>
