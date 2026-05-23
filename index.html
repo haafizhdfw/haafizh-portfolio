@@ -328,33 +328,29 @@
 
     .about-left {}
 
-    .about-eyebrow {
-      font-size: 11px; font-weight: 600;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--lgray); margin-bottom: 20px;
-    }
+    .about-eyebrow { display: none; }
 
     /* Available — dot + text only, no border */
     .available-tag {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 14px; font-weight: 500;
-      letter-spacing: -0.01em;
-      color: var(--black); margin-bottom: 36px;
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 35px; font-weight: 300;
+      letter-spacing: -0.06em;
+      color: var(--black); margin-bottom: 28px;
     }
     .available-tag::before {
-      content: ''; width: 8px; height: 8px; border-radius: 50%;
+      content: ''; width: 22px; height: 22px; border-radius: 50%;
       flex-shrink: 0;
-      background: #16a34a; box-shadow: 0 0 8px #16a34a;
+      background: #0000FF; box-shadow: 0 0 10px rgba(0,0,255,0.5);
     }
 
     /* Big intro heading */
     .about-hi {
-      font-size: clamp(30px, 3.8vw, 52px);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1.2;
+      font-size: 110px;
+      font-weight: 300;
+      letter-spacing: -0.09em;
+      line-height: 1.25;
       color: var(--black);
-      margin-bottom: 28px;
+      margin-bottom: 40px;
     }
 
     /* Inline pill base */
@@ -362,15 +358,15 @@
       display: inline-flex;
       align-items: center;
       border-radius: 100px;
-      font-size: 0.82em;
-      font-weight: 700;
-      letter-spacing: -0.03em;
+      font-size: 0.78em;
+      font-weight: 500;
+      letter-spacing: -0.06em;
       line-height: 1;
-      padding: 0.2em 0.6em 0.25em;
+      padding: 0.18em 0.52em 0.22em;
       white-space: nowrap;
       vertical-align: middle;
       position: relative;
-      top: -0.05em;
+      top: -0.06em;
     }
     .pill-name  { background: var(--black); color: var(--white); }
     .pill-role  { background: var(--blue);  color: var(--white); }
@@ -851,16 +847,14 @@
   <!-- ══════════════ ABOUT ══════════════ -->
   <section id="about">
     <div class="about-left">
-      <div class="about-eyebrow">About Me</div>
-
       <div class="available-tag">Available for Freelance</div>
 
       <div class="about-hi reveal">
-        Hi! I'm <span class="pill pill-name">Haafizh Daffa</span>
-        a <span class="pill pill-role">Digital Marketing Systems Builder</span>
-        from <span class="pill pill-loc">Indonesia</span> —
-        I build the tools, run the channels,
-        and read the data.
+        Hi! I'm <span class="pill pill-name">Haafizh Daffa</span><br>
+        a <span class="pill pill-role">Digital Marketing Systems Builder</span><br>
+        from <span class="pill pill-loc">Indonesia</span><br>
+        I turn strategy into systems,<br>
+        and let the data tell the story.
       </div>
 
       <p class="about-bio reveal">
