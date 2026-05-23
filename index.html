@@ -320,8 +320,8 @@
     #about {
       padding: 100px 48px;
       display: grid;
-      grid-template-columns: 1fr 360px;
-      gap: 80px;
+      grid-template-columns: 1fr 440px;
+      gap: 72px;
       align-items: start;
       border-top: 1px solid var(--line);
     }
@@ -414,25 +414,25 @@
       display: block;
     }
     .about-card-body {
-      padding: 22px 22px 20px;
+      padding: 28px 28px 26px;
     }
     .about-card-name {
-      font-size: 20px; font-weight: 800;
+      font-size: 26px; font-weight: 800;
       letter-spacing: -0.05em; color: var(--black);
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
     .about-card-role {
-      font-size: 11px; font-weight: 500;
-      letter-spacing: 0.04em; text-transform: uppercase;
-      color: var(--gray); margin-bottom: 18px;
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--gray); margin-bottom: 22px;
     }
     /* Social icons row */
     .about-card-socials {
-      display: flex; gap: 8px; margin-bottom: 22px;
+      display: flex; gap: 10px; margin-bottom: 26px;
       flex-wrap: wrap;
     }
     .about-card-socials a {
-      width: 34px; height: 34px; border-radius: 50%;
+      width: 40px; height: 40px; border-radius: 50%;
       border: 1.5px solid var(--line);
       display: flex; align-items: center; justify-content: center;
       color: var(--black); text-decoration: none;
@@ -442,25 +442,29 @@
     .about-card-socials a:hover {
       background: var(--black); border-color: var(--black); color: var(--white);
     }
-    .about-card-socials svg { width: 15px; height: 15px; fill: currentColor; }
+    .about-card-socials svg { width: 17px; height: 17px; fill: currentColor; }
     /* Services in card */
     .about-card-services-label {
-      font-size: 10px; font-weight: 700;
+      font-size: 11px; font-weight: 700;
       letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--lgray); margin-bottom: 10px;
+      color: var(--lgray); margin-bottom: 14px;
     }
     .about-card-services-list {
-      list-style: none; display: flex; flex-direction: column; gap: 8px;
+      list-style: none; display: flex; flex-direction: column; gap: 0;
     }
     .about-card-services-list li {
-      font-size: 12.5px; font-weight: 500; color: var(--black);
-      letter-spacing: -0.02em;
-      display: flex; align-items: center; gap: 8px;
+      font-size: 15px; font-weight: 500; color: var(--black);
+      letter-spacing: -0.03em;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      transition: padding-left 0.2s;
+      cursor: default;
     }
-    .about-card-services-list li::before {
-      content: '';
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--blue); flex-shrink: 0;
+    .about-card-services-list li:hover { padding-left: 8px; }
+    .about-card-services-list li::after {
+      content: '→'; color: var(--lgray);
+      flex-shrink: 0;
     }
 
     /* ─────────────────────────────────────────────
@@ -912,10 +916,11 @@
         <!-- Services in card -->
         <div class="about-card-services-label">My Services</div>
         <ul class="about-card-services-list">
-          <li>Social Media &amp; Paid Ads</li>
+          <li>Social Media Strategy &amp; Management</li>
+          <li>Meta Ads &amp; Paid Campaign Management</li>
           <li>SEO &amp; Landing Page Optimization</li>
-          <li>CRM &amp; Sales Dashboard Dev</li>
-          <li>Marketing Automation &amp; AI</li>
+          <li>Custom CRM &amp; Sales Dashboard Dev</li>
+          <li>Marketing Automation &amp; AI Workflows</li>
           <li>Creative Content &amp; Brand Design</li>
         </ul>
       </div>
