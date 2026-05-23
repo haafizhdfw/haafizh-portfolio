@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>N'Pure CICA Series — Creative Moodboard · Davian Harris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:    #f3f4f3;
+      --black: #0d0d0d;
+      --gray:  #6b6b6b;
+      --lgray: #b8b8b2;
+      --red:   #e63329;
+      --blue:  #2563ff;
+      --white: #ffffff;
+      --line:  #ddddd5;
+      --ls-tight:  -0.08em;
+      --ls-normal: -0.03em;
+      --nav-h: 88px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg); color: var(--black);
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
+    }
+
+    /* ── Cursor ── */
+    .cur-dot {
+      position: fixed; pointer-events: none; z-index: 9999;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--black); transform: translate(-50%,-50%);
+    }
+    .cur-ring {
+      position: fixed; pointer-events: none; z-index: 9998;
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1.5px solid rgba(0,0,0,.25); transform: translate(-50%,-50%);
+      transition: transform .5s ease, width .25s, height .25s;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: var(--nav-h);
+      display: flex; align-items: center;
+      padding: 0 52px;
+      background: var(--bg);
+      box-shadow: 0 1px 0 var(--line), 0 4px 24px rgba(0,0,0,0.06);
+    }
+    .nav-logo { display: flex; align-items: center; margin-right: auto; text-decoration: none; }
+    .nav-logo img { height: 60px; width: auto; display: block; }
+    .nav-center { flex: 1; display: flex; justify-content: center; gap: 56px; list-style: none; }
+    .nav-center a {
+      font-size: 18px; font-weight: 500; letter-spacing: var(--ls-normal);
+      color: var(--black); text-decoration: none; transition: opacity .2s;
+    }
+    .nav-center a:hover { opacity: .45; }
+    .nav-right { display: flex; align-items: center; gap: 32px; flex-shrink: 0; }
+    .nav-btn {
+      display: inline-flex; align-items: center;
+      padding: 8px 8px 8px 28px;
+      background: var(--blue); color: var(--white);
+      font-size: 18px; font-weight: 600; letter-spacing: -0.01em;
+      text-decoration: none; border-radius: 100px;
+      transition: background .2s, transform .15s; white-space: nowrap;
+    }
+    .nav-btn:hover { background: #1a4de0; transform: scale(1.03); }
+    .nav-btn-icon {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; background: var(--white);
+      border-radius: 50%; margin-left: 16px; flex-shrink: 0;
+      transition: transform .2s;
+    }
+    .nav-btn:hover .nav-btn-icon { transform: rotate(45deg); }
+    .nav-btn-icon svg { width: 18px; height: 18px; color: var(--black); }
+
+    /* ── Page wrapper ── */
+    .page { padding-top: var(--nav-h); }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative; height: 520px; overflow: hidden;
+      background: #222222;
+    }
+    .hero-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; filter: brightness(.35) saturate(.7);
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      height: 100%; display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 56px 52px;
+    }
+    .hero-back {
+      position: absolute; top: 36px; left: 52px;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 500; letter-spacing: var(--ls-normal);
+      color: rgba(255,255,255,.5); text-decoration: none;
+      transition: color .2s;
+    }
+    .hero-back:hover { color: var(--white); }
+    .hero-back svg { width: 14px; height: 14px; }
+    .hero-chips {
+      display: flex; align-items: center; gap: 10px;
+      flex-wrap: wrap; margin-bottom: 24px;
+    }
+    .hero-chip {
+      padding: 5px 14px;
+      border: 1px solid rgba(255,255,255,.2);
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(8px);
+      border-radius: 100px;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: .08em; color: rgba(255,255,255,.8);
+      text-transform: uppercase;
+    }
+    .hero-title {
+      font-size: clamp(56px, 7vw, 100px);
+      font-weight: 900; letter-spacing: var(--ls-tight);
+      line-height: 0.9; color: var(--white);
+    }
+    .hero-title span { color: #CCFF00; }
+
+    /* ── Stats bar ── */
+    .stats-bar {
+      background: #222222; overflow: hidden; padding: 36px 0;
+    }
+    .stats-inner {
+      display: flex; align-items: center; gap: 48px;
+      width: max-content;
+      animation: marquee 30s linear infinite;
+    }
+    .stats-inner:hover { animation-play-state: paused; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .stat-bullet { width: 16px; height: 16px; border-radius: 50%; background: #CCFF00; flex-shrink: 0; }
+    .stat-item { display: flex; align-items: baseline; gap: 8px; white-space: nowrap; }
+    .stat-n { font-weight: 700; font-size: 30px; letter-spacing: var(--ls-tight); color: #CCFF00; }
+    .stat-l { font-weight: 300; font-size: 30px; letter-spacing: var(--ls-tight); color: #ffffff; }
+
+    /* ── Section base ── */
+    .section {
+      padding: 96px 52px;
+      border-top: 1px solid var(--line);
+    }
+    .section:first-of-type { border-top: none; }
+
+    .section-eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 28px;
+    }
+    .section-num {
+      font-size: 11px; font-weight: 700; letter-spacing: .2em;
+      color: var(--lgray); text-transform: uppercase;
+    }
+    .section-tag {
+      font-size: 11px; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--gray);
+      padding: 3px 12px; border: 1px solid var(--line);
+      border-radius: 100px;
+    }
+    .section-tag.black { background: var(--black); color: var(--white); border-color: var(--black); }
+    .section-tag.blue  { background: var(--blue);  color: var(--white); border-color: var(--blue); }
+
+    .section-title {
+      font-size: clamp(44px, 5.5vw, 80px);
+      font-weight: 900; letter-spacing: var(--ls-tight);
+      line-height: 0.92; color: var(--black); margin-bottom: 24px;
+    }
+    .section-title em { font-style: normal; color: var(--blue); }
+
+    .section-lead {
+      font-size: clamp(16px, 1.4vw, 19px);
+      font-weight: 400; color: var(--gray);
+      line-height: 1.7; letter-spacing: var(--ls-normal);
+      max-width: 640px; margin-bottom: 56px;
+    }
+    .section-lead strong { color: var(--black); font-weight: 600; }
+
+    /* ── Two-col layout ── */
+    .two-col {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+      align-items: start;
+    }
+    .three-col {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px;
+      margin-bottom: 56px;
+    }
+    .four-col {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 2px;
+      margin-bottom: 56px;
+    }
+
+    /* ── Info cards (white, border) ── */
+    .info-card {
+      background: var(--white); border: 1px solid var(--line);
+      border-radius: 20px; padding: 32px;
+    }
+    .info-card-icon { font-size: 24px; margin-bottom: 16px; }
+    .info-card-title {
+      font-size: 18px; font-weight: 700; letter-spacing: var(--ls-tight);
+      color: var(--black); margin-bottom: 10px;
+    }
+    .info-card-desc {
+      font-size: 14px; font-weight: 400; color: var(--gray);
+      line-height: 1.65; letter-spacing: var(--ls-normal);
+    }
+    .info-card-desc strong { color: var(--black); font-weight: 600; }
+
+    /* ── Stat cells ── */
+    .stat-cell {
+      background: var(--white); padding: 32px 28px;
+      border: 1px solid var(--line);
+    }
+    .stat-cell.dark { background: var(--black); }
+    .stat-cell:first-child { border-radius: 16px 0 0 16px; }
+    .stat-cell:last-child  { border-radius: 0 16px 16px 0; }
+
+    .stat-label {
+      font-size: 11px; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--lgray); margin-bottom: 10px;
+    }
+    .stat-cell.dark .stat-label { color: rgba(255,255,255,.3); }
+    .stat-value {
+      font-size: clamp(28px, 3.5vw, 48px);
+      font-weight: 900; letter-spacing: var(--ls-tight);
+      color: var(--black); line-height: 1; margin-bottom: 6px;
+    }
+    .stat-value.blue { color: var(--blue); }
+    .stat-cell.dark .stat-value { color: var(--white); }
+    .stat-note {
+      font-size: 12px; font-weight: 500;
+      color: var(--lgray); letter-spacing: var(--ls-normal);
+    }
+    .stat-cell.dark .stat-note { color: rgba(255,255,255,.3); }
+
+    /* ── Tools pills ── */
+    .tools-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 48px; }
+    .tool-chip {
+      display: inline-flex; align-items: center;
+      background: var(--white); border: 1.5px solid var(--black);
+      border-radius: 100px;
+      font-size: 13px; font-weight: 500;
+      letter-spacing: -0.02em; color: var(--black);
+      padding: 6px 16px; white-space: nowrap;
+    }
+
+    /* ── Process timeline ── */
+    .timeline { position: relative; padding-left: 36px; margin-bottom: 56px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 8px; top: 8px;
+      width: 2px; height: calc(100% - 16px);
+      background: var(--line);
+    }
+    .timeline-step { position: relative; margin-bottom: 40px; }
+    .timeline-step:last-child { margin-bottom: 0; }
+    .timeline-step::before {
+      content: ''; position: absolute; left: -30px; top: 5px;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--black); border: 2px solid var(--bg); z-index: 1;
+    }
+    .timeline-step-num {
+      font-size: 10px; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--lgray); margin-bottom: 6px;
+    }
+    .timeline-step-title {
+      font-size: 19px; font-weight: 700; letter-spacing: var(--ls-tight);
+      color: var(--black); margin-bottom: 8px;
+    }
+    .timeline-step-desc {
+      font-size: 14px; font-weight: 400; color: var(--gray);
+      line-height: 1.7; letter-spacing: var(--ls-normal); max-width: 560px;
+    }
+    .timeline-step-desc strong { color: var(--black); font-weight: 600; }
+
+    /* ── Quote ── */
+    .quote-block {
+      border-left: 3px solid var(--black);
+      padding: 20px 28px;
+      background: var(--white);
+      border-radius: 0 12px 12px 0;
+      margin-bottom: 48px;
+    }
+    .quote-block p {
+      font-size: 17px; font-weight: 500; letter-spacing: var(--ls-normal);
+      color: var(--black); line-height: 1.6; font-style: italic;
+    }
+    .quote-block cite {
+      display: block; margin-top: 12px;
+      font-size: 11px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--lgray); font-style: normal;
+    }
+
+    /* ── Scene rows (like project rows) ── */
+    .scene-list { display: flex; flex-direction: column; margin-bottom: 56px; }
+    .scene-row {
+      position: relative; overflow: hidden;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 24px 36px;
+      background: var(--white);
+      border-top: 1px solid var(--line);
+      transition: background .2s, padding-left .2s;
+      cursor: default;
+    }
+    .scene-row:last-child { border-bottom: 1px solid var(--line); }
+    .scene-row:hover { background: #e8e7e1; padding-left: 48px; }
+    .scene-left { display: flex; align-items: flex-start; gap: 24px; }
+    .scene-num {
+      font-size: 11px; font-weight: 700; letter-spacing: .2em;
+      color: var(--lgray); padding-top: 3px; flex-shrink: 0;
+      min-width: 36px;
+    }
+    .scene-info {}
+    .scene-title {
+      font-size: 20px; font-weight: 700; letter-spacing: var(--ls-tight);
+      color: var(--black); margin-bottom: 4px;
+    }
+    .scene-desc {
+      font-size: 13px; font-weight: 400; color: var(--gray);
+      letter-spacing: var(--ls-normal); line-height: 1.5; max-width: 500px;
+    }
+    .scene-shots { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+    .shot-pill {
+      display: inline-flex; align-items: center;
+      padding: 4px 12px; background: var(--bg);
+      border: 1px solid var(--line); border-radius: 100px;
+      font-size: 11px; font-weight: 600; letter-spacing: .06em;
+      color: var(--gray); text-transform: uppercase; white-space: nowrap;
+    }
+
+    /* ── Dark CTA banner ── */
+    .cta-banner {
+      background: var(--black); border-radius: 24px;
+      padding: 64px 56px; position: relative; overflow: hidden;
+      margin-bottom: 56px;
+    }
+    .cta-banner::before {
+      content: 'NPURE';
+      position: absolute; right: -20px; bottom: -30px;
+      font-size: 200px; font-weight: 900; letter-spacing: var(--ls-tight);
+      color: rgba(255,255,255,.03); line-height: 1; pointer-events: none;
+    }
+    .cta-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 20px;
+    }
+    .cta-title {
+      font-size: clamp(36px, 4.5vw, 64px);
+      font-weight: 900; letter-spacing: var(--ls-tight);
+      line-height: 0.93; color: var(--white); margin-bottom: 20px;
+    }
+    .cta-title span { color: #CCFF00; }
+    .cta-desc {
+      font-size: 16px; font-weight: 400;
+      color: rgba(255,255,255,.55); line-height: 1.65;
+      letter-spacing: var(--ls-normal); max-width: 520px; margin-bottom: 40px;
+    }
+    .cta-specs { display: flex; flex-wrap: wrap; gap: 10px; }
+    .cta-spec {
+      display: inline-flex; align-items: center;
+      padding: 7px 18px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 100px;
+      font-size: 12px; font-weight: 600; letter-spacing: .04em;
+      color: rgba(255,255,255,.8);
+    }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-center { display: none; }
+      .section { padding: 64px 24px; }
+      .hero-inner { padding: 40px 24px; }
+      .two-col { grid-template-columns: 1fr; }
+      .three-col, .four-col { grid-template-columns: 1fr 1fr; }
+      .scene-shots { display: none; }
+      .cta-banner { padding: 40px 28px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="cur-dot" id="curDot"></div>
+  <div class="cur-ring" id="curRing"></div>
+
+  <!-- ══ NAV ══ -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="logo-portfolio.svg" alt="Davian Harris" />
+    </a>
+    <ul class="nav-center">
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contacts</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="index.html#contact" class="nav-btn">
+        Contact Me
+        <span class="nav-btn-icon">
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 15L15 3M15 3H7M15 3v8"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- ══ HERO ══ -->
+    <div class="hero">
+      <img src="npure-bg.jpeg" alt="N'Pure CICA Series" class="hero-img" />
+      <div class="hero-inner">
+        <a href="index.html" class="hero-back">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M9 2L4 7l5 5"/>
+          </svg>
+          All Projects
+        </a>
+        <div class="hero-chips">
+          <div class="hero-chip">Creative Content</div>
+          <div class="hero-chip">Moodboard · Deck</div>
+          <div class="hero-chip">2024</div>
+        </div>
+        <h1 class="hero-title">N'Pure<br><span>CICA Series</span></h1>
+      </div>
+    </div>
+
+    <!-- ══ STATS BAR ══ -->
+    <div class="stats-bar">
+      <div class="stats-inner">
+        <div class="stat-bullet"></div>
+        <div class="stat-item"><span class="stat-n">5</span><span class="stat-l">Products</span></div>
+        <div class="stat-bullet"></div>
+        <div class="stat-item"><span class="stat-n">30s</span><span class="stat-l">Vertical Video</span></div>
+        <div class="stat-bullet"></div>
+        <div class="stat-item"><span class="stat-n">7+</span><span class="stat-l">Storyboard Scenes</span></div>
+        <div class="stat-bullet"></div>
+        <div class="stat-item"><span class="stat-n">Overlay</span><span class="stat-l">Studio Ltd.</span></div>
+        <div class="stat-bullet"></div>
+        <div class="stat-item"><span class="stat-n">2024</span><span class="stat-l">Production</span></div>
+        <!-- duplicate for seamless loop -->
+        <div class="stat-bullet"></div>
+        <div class="stat-item"><span class="stat-n">5</span><span class="stat-l">Products</span></div>
+        <div class="stat-bullet"></div>
+        <div class="stat-item"><span class="stat-n">30s</span><span class="stat-l">Vertical Video</span></div>
+        <div class="stat-bullet"></div>
+        <div class="stat-item"><span class="stat-n">7+</span><span class="stat-l">Storyboard Scenes</span></div>
+        <div class="stat-bullet"></div>
+        <div class="stat-item"><span class="stat-n">Overlay</span><span class="stat-l">Studio Ltd.</span></div>
+        <div class="stat-bullet"></div>
+        <div class="stat-item"><span class="stat-n">2024</span><span class="stat-l">Production</span></div>
+      </div>
+    </div>
+
+    <!-- ══ 01 OVERVIEW ══ -->
+    <section class="section reveal" id="overview">
+      <div class="section-eyebrow">
+        <span class="section-num">01</span>
+        <span class="section-tag">Overview</span>
+      </div>
+      <div class="two-col" style="margin-bottom:56px;">
+        <div>
+          <h2 class="section-title">Healthy Skincare<br>for <em>Healthy Skin</em></h2>
+        </div>
+        <div>
+          <p class="section-lead" style="margin-bottom:0;">
+            N'Pure needed a <strong>30-second vertical product video</strong> for their CICA Series — five organic skincare products built around Centella Asiatica. At Overlay Studio Limited, I handled the entire <strong>creative pre-production</strong>: script, visual research, moodboard curation, and the brand-aligned deck used to align client and crew before the shoot.
+          </p>
+        </div>
+      </div>
+
+      <div class="four-col">
+        <div class="stat-cell">
+          <div class="stat-label">Products</div>
+          <div class="stat-value">5</div>
+          <div class="stat-note">CICA Series SKUs</div>
+        </div>
+        <div class="stat-cell dark">
+          <div class="stat-label">Output</div>
+          <div class="stat-value">30s</div>
+          <div class="stat-note">Vertical video</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-label">Scenes</div>
+          <div class="stat-value blue">7+</div>
+          <div class="stat-note">Storyboard sections</div>
+        </div>
+        <div class="stat-cell dark">
+          <div class="stat-label">Studio</div>
+          <div class="stat-value" style="font-size:22px;">Overlay</div>
+          <div class="stat-note">2024</div>
+        </div>
+      </div>
+
+      <div class="tools-row">
+        <div class="tool-chip">Eagle</div>
+        <div class="tool-chip">PowerPoint</div>
+        <div class="tool-chip">YouTube</div>
+        <div class="tool-chip">TikTok</div>
+        <div class="tool-chip">Instagram</div>
+        <div class="tool-chip">Pinterest</div>
+      </div>
+    </section>
+
+    <!-- ══ 02 BRIEF ══ -->
+    <section class="section reveal" id="brief">
+      <div class="section-eyebrow">
+        <span class="section-num">02</span>
+        <span class="section-tag">The Brief</span>
+      </div>
+      <h2 class="section-title">What the<br>Brand <em>Needed</em></h2>
+      <p class="section-lead">
+        N'Pure CICA Series covers Face Wash, Toner, Serum, Pad, and Moisturizer — all built on Organic Centella Asiatica. The brief called for a video that felt <strong>organic, clean, and calming</strong>, with a core claim of hypoallergenic and dermatologically tested skincare.
+      </p>
+
+      <div class="quote-block">
+        <p>"NPURE Organic Centella Asiatica — skincare yang berfungsi menghidrasi dan membantu mengatasi jerawat. Hypoallergenic. Dermatologically tested. Healthy Skincare for Healthy Skin."</p>
+        <cite>— Key Message · N'Pure Brand Brief</cite>
+      </div>
+
+      <div class="three-col">
+        <div class="stat-cell">
+          <div class="stat-label">Products</div>
+          <div class="stat-value" style="font-size:15px; line-height:1.6; font-weight:700;">Face Wash · Toner<br>Serum · Pad<br>Moisturizer</div>
+        </div>
+        <div class="stat-cell dark">
+          <div class="stat-label">Key Visual</div>
+          <div class="stat-value" style="font-size:18px; line-height:1.5;">Organic<br>Clean<br>Calming</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-label">Format</div>
+          <div class="stat-value" style="font-size:18px; line-height:1.5;">30s<br>Vertical<br>9:16</div>
+          <div class="stat-note">Social-first output</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 03 MY ROLE ══ -->
+    <section class="section reveal" id="role">
+      <div class="section-eyebrow">
+        <span class="section-num">03</span>
+        <span class="section-tag blue">My Role</span>
+      </div>
+      <h2 class="section-title">From Brief<br>to <em>Ready-to-Shoot</em></h2>
+      <p class="section-lead">
+        My job was to take the N'Pure brief and turn it into a production-ready creative document — something the director could open and immediately understand the look, feel, and shot plan for every product scene.
+      </p>
+
+      <div class="two-col" style="margin-bottom:56px;">
+        <div class="info-card">
+          <div class="info-card-icon">✍️</div>
+          <div class="info-card-title">Script Writing</div>
+          <div class="info-card-desc">Wrote the full creative script for the 30-second vertical video — scene-by-scene narration and shot intent, aligned to N'Pure's brand voice and key message.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">🔍</div>
+          <div class="info-card-title">Reference Research</div>
+          <div class="info-card-desc">Sourced visual references from <strong>YouTube, TikTok, Instagram, and Pinterest</strong> — hunting for product cinematography and organic/nature aesthetics that matched the brief.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">🗂️</div>
+          <div class="info-card-title">Eagle Curation</div>
+          <div class="info-card-desc">Organized all references in <strong>Eagle</strong> — tagged by scene, product, and shot type. Built a shared visual library the entire team could pull from during production prep.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">🎬</div>
+          <div class="info-card-title">Timeline Moodboard</div>
+          <div class="info-card-desc">Assembled the curated references into a <strong>scene-by-scene timeline</strong> — mapping each shot type (wide, close-up, flying motion, overhead) to the product sequence.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">🎨</div>
+          <div class="info-card-title">Deck Design (PPT)</div>
+          <div class="info-card-desc">Designed the final <strong>Creative Deck in PowerPoint</strong> — visually aligned with N'Pure's organic identity, structured to present clearly and feel personal when shown to the brand.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">📋</div>
+          <div class="info-card-title">Client Presentation</div>
+          <div class="info-card-desc">Built the deck to be <strong>self-explanatory in presentation</strong> — each slide structured so the brand team could visualize the final video before a single camera was turned on.</div>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="timeline-step-num">Step 01</div>
+          <div class="timeline-step-title">Receive Brief → Write Script</div>
+          <div class="timeline-step-desc">Reviewed N'Pure's brand guidelines, product specs, and key message. Drafted the script — defining scene intentions, pacing, and product focus across the 30-second runtime.</div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step-num">Step 02</div>
+          <div class="timeline-step-title">Research Across Platforms</div>
+          <div class="timeline-step-desc">Combed through <strong>YouTube, TikTok, Instagram, and Pinterest</strong> for reference videos matching the organic/nature aesthetic — focusing on product cinematography with calming, clean visual language.</div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step-num">Step 03</div>
+          <div class="timeline-step-title">Organize in Eagle</div>
+          <div class="timeline-step-desc">Imported and tagged every reference in Eagle by product, scene type, and shot angle — building a structured visual library the whole team could access during prep.</div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step-num">Step 04</div>
+          <div class="timeline-step-title">Build Timeline Moodboard</div>
+          <div class="timeline-step-desc">Selected the strongest references for each scene and arranged them into a <strong>chronological moodboard timeline</strong> — wide shots, close-ups, flying motions, overhead angles — matching the script sequence.</div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step-num">Step 05</div>
+          <div class="timeline-step-title">Design Deck → Present to Brand</div>
+          <div class="timeline-step-desc">Built the final Creative Deck in PowerPoint — clean, brand-consistent, and structured to align director and client before production day. No ambiguity on set.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 04 SCENE BREAKDOWN ══ -->
+    <section class="section reveal" id="breakdown">
+      <div class="section-eyebrow">
+        <span class="section-num">04</span>
+        <span class="section-tag black">Scene Breakdown</span>
+      </div>
+      <h2 class="section-title">Scene by Scene,<br><em>Shot by Shot</em></h2>
+      <p class="section-lead">
+        Every product had its own dedicated section in the moodboard, with specific shot types defined for each. References were pulled from creators like <strong>shotbyrenra</strong> and other organic beauty cinematographers.
+      </p>
+
+      <div class="scene-list">
+        <div class="scene-row">
+          <div class="scene-left">
+            <div class="scene-num">/01/</div>
+            <div class="scene-info">
+              <div class="scene-title">Background Setup</div>
+              <div class="scene-desc">Nature set with forest background and Centella Asiatica leaves — establishes the organic, refreshing brand world from the first frame</div>
+            </div>
+          </div>
+          <div class="scene-shots">
+            <span class="shot-pill">Ambience</span>
+            <span class="shot-pill">Hero BG</span>
+          </div>
+        </div>
+        <div class="scene-row">
+          <div class="scene-left">
+            <div class="scene-num">/02/</div>
+            <div class="scene-info">
+              <div class="scene-title">Group Shoot — Full CICA Series</div>
+              <div class="scene-desc">All five products together in the nature set — establishes the full lineup and brand cohesion</div>
+            </div>
+          </div>
+          <div class="scene-shots">
+            <span class="shot-pill">Wide</span>
+            <span class="shot-pill">Group</span>
+          </div>
+        </div>
+        <div class="scene-row">
+          <div class="scene-left">
+            <div class="scene-num">/03/</div>
+            <div class="scene-info">
+              <div class="scene-title">Centella Asiatica Detail</div>
+              <div class="scene-desc">Hero ingredient spotlight — leaves, texture, and organic detail shots that reinforce the natural formula claim</div>
+            </div>
+          </div>
+          <div class="scene-shots">
+            <span class="shot-pill">Macro</span>
+            <span class="shot-pill">Texture</span>
+          </div>
+        </div>
+        <div class="scene-row">
+          <div class="scene-left">
+            <div class="scene-num">/04/</div>
+            <div class="scene-info">
+              <div class="scene-title">Face Wash</div>
+              <div class="scene-desc">Three-angle coverage: wide product placement, close-up packaging detail, and texture/foam shot to show the formula</div>
+            </div>
+          </div>
+          <div class="scene-shots">
+            <span class="shot-pill">Wide</span>
+            <span class="shot-pill">Close Up</span>
+            <span class="shot-pill">Texture</span>
+          </div>
+        </div>
+        <div class="scene-row">
+          <div class="scene-left">
+            <div class="scene-num">/05/</div>
+            <div class="scene-info">
+              <div class="scene-title">Acne Clear & Toner</div>
+              <div class="scene-desc">Dynamic motion work — flying product shot, close-up label, overhead pour. Client revision: pouring lotion scene added from shotbyrenra reference</div>
+            </div>
+          </div>
+          <div class="scene-shots">
+            <span class="shot-pill">Flying</span>
+            <span class="shot-pill">Close Up</span>
+            <span class="shot-pill">Overhead</span>
+          </div>
+        </div>
+        <div class="scene-row">
+          <div class="scene-left">
+            <div class="scene-num">/06/</div>
+            <div class="scene-info">
+              <div class="scene-title">Face Serum</div>
+              <div class="scene-desc">Wide establishing shot, flying motion for energy, close-up dropper detail to highlight serum texture and quality</div>
+            </div>
+          </div>
+          <div class="scene-shots">
+            <span class="shot-pill">Wide</span>
+            <span class="shot-pill">Flying</span>
+            <span class="shot-pill">Close Up</span>
+          </div>
+        </div>
+        <div class="scene-row">
+          <div class="scene-left">
+            <div class="scene-num">/07/</div>
+            <div class="scene-info">
+              <div class="scene-title">Clear Pad</div>
+              <div class="scene-desc">Three-angle coverage: wide product placement, close-up pad texture, and a dedicated clear pad application shot</div>
+            </div>
+          </div>
+          <div class="scene-shots">
+            <span class="shot-pill">Wide</span>
+            <span class="shot-pill">Close Up</span>
+            <span class="shot-pill">Pad Detail</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 05 DELIVERABLE ══ -->
+    <section class="section reveal" id="deliverable">
+      <div class="section-eyebrow">
+        <span class="section-num">05</span>
+        <span class="section-tag">Deliverable</span>
+      </div>
+      <h2 class="section-title">A Deck the Brand<br><em>Could Feel</em></h2>
+      <p class="section-lead">
+        The final deliverable wasn't just a document — it was a <strong>pre-production alignment tool</strong>. The Creative Deck gave the director, brand team, and crew a shared visual language before the camera ever rolled.
+      </p>
+
+      <div class="cta-banner">
+        <div class="cta-eyebrow">Final Output</div>
+        <div class="cta-title">Creative Deck<br><span>& Moodboard</span></div>
+        <div class="cta-desc">
+          A fully designed, brand-consistent production deck covering script, visual direction, per-product shot lists, and reference moodboard — built to present directly to N'Pure and align the team in one session.
+        </div>
+        <div class="cta-specs">
+          <div class="cta-spec">30 Sec Vertical Video</div>
+          <div class="cta-spec">7 Scene Sections</div>
+          <div class="cta-spec">5 Products</div>
+          <div class="cta-spec">PPT Deck Design</div>
+          <div class="cta-spec">Overlay Studio 2024</div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="stat-cell dark" style="border-radius:16px;">
+          <div class="stat-label">Outcome</div>
+          <div class="stat-value" style="font-size:20px; line-height:1.4;">Deck approved &amp; used in production</div>
+          <div class="stat-note">Full shoot executed against the moodboard</div>
+        </div>
+        <div class="stat-cell" style="border-radius:16px;">
+          <div class="stat-label">What Made It Work</div>
+          <div class="stat-value" style="font-size:16px; line-height:1.5;">Visual clarity + brand alignment + per-scene shot specificity</div>
+          <div class="stat-note">No ambiguity on set</div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /.page -->
+
+  <script>
+    /* Cursor */
+    const dot = document.getElementById('curDot');
+    const ring = document.getElementById('curRing');
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+    (function loop(){
+      rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+      dot.style.left=mx+'px'; dot.style.top=my+'px';
+      ring.style.left=rx+'px'; ring.style.top=ry+'px';
+      requestAnimationFrame(loop);
+    })();
+    document.querySelectorAll('a,button').forEach(el=>{
+      el.addEventListener('mouseenter',()=>{ring.style.width='52px';ring.style.height='52px';});
+      el.addEventListener('mouseleave',()=>{ring.style.width='32px';ring.style.height='32px';});
+    });
+
+    /* Reveal */
+    const obs = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+    },{threshold:.07});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  </script>
+
+</body>
+</html>
